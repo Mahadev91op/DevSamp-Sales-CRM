@@ -170,7 +170,7 @@ export default function Leads() {
       'Won': 'bg-emerald-50 text-emerald-600',
       'Lost': 'bg-red-50 text-red-600',
     };
-    return map[status] || 'bg-neutral-50 text-neutral-600';
+    return map[status] || 'bg-gray-50 text-gray-700';
   };
 
   // Filtering leads
@@ -187,12 +187,12 @@ export default function Leads() {
       {/* Title block */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-neutral-800 tracking-tight">Leads Pipeline</h1>
-          <p className="text-xs text-neutral-400 mt-1">Nurture and close medical shop leads</p>
+          <h1 className="text-xl font-bold text-gray-900 tracking-tight">Leads Pipeline</h1>
+          <p className="text-xs text-gray-400 mt-1">Nurture and close medical shop leads</p>
         </div>
         <button 
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-xs cursor-pointer transition-all"
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-sm cursor-pointer transition-all"
         >
           <Plus className="w-4 h-4" />
           Create Lead
@@ -200,21 +200,21 @@ export default function Leads() {
       </div>
 
       {/* Filter Options */}
-      <div className="flex flex-col sm:flex-row gap-4 bg-white p-4 border border-neutral-100 rounded-2xl shadow-xs">
+      <div className="flex flex-col sm:flex-row gap-4 bg-white p-4 border border-gray-200 rounded-2xl shadow-sm">
         <div className="flex-1 relative">
-          <Search className="absolute left-3 top-3 w-4 h-4 text-neutral-400" />
+          <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
           <input 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search leads by name or phone..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-neutral-200 bg-neutral-50/50 text-xs"
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 bg-white text-xs"
           />
         </div>
         <div className="flex gap-3">
           <select 
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50/50"
+            className="px-3 py-2 rounded-xl border border-gray-200 text-xs bg-white"
           >
             <option value="All">All Statuses</option>
             <option value="New">New</option>
@@ -228,7 +228,7 @@ export default function Leads() {
           <select 
             value={filterPriority}
             onChange={(e) => setFilterPriority(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50/50"
+            className="px-3 py-2 rounded-xl border border-gray-200 text-xs bg-white"
           >
             <option value="All">All Priorities</option>
             <option value="High">High</option>
@@ -241,20 +241,20 @@ export default function Leads() {
       {/* Leads Table */}
       {loading ? (
         <div className="space-y-4">
-          <div className="h-10 bg-neutral-200 rounded-xl animate-pulse" />
-          <div className="h-44 bg-neutral-200 rounded-2xl animate-pulse" />
+          <div className="h-10 bg-gray-200 rounded-xl animate-pulse" />
+          <div className="h-44 bg-gray-200 rounded-2xl animate-pulse" />
         </div>
       ) : filteredLeads.length === 0 ? (
-        <div className="text-center py-20 bg-white border border-neutral-100 rounded-3xl">
-          <Users className="w-12 h-12 text-neutral-300 mx-auto" />
-          <h3 className="mt-4 text-xs font-semibold text-neutral-700">No leads found</h3>
-          <p className="text-[10px] text-neutral-400 mt-1">Get started by creating a new lead.</p>
+        <div className="text-center py-20 bg-white border border-gray-200 rounded-3xl">
+          <Users className="w-12 h-12 text-gray-300 mx-auto" />
+          <h3 className="mt-4 text-xs font-semibold text-gray-800">No leads found</h3>
+          <p className="text-[10px] text-gray-400 mt-1">Get started by creating a new lead.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto bg-white border border-neutral-100 rounded-2xl shadow-xs">
+        <div className="overflow-x-auto bg-white border border-gray-200 rounded-2xl shadow-sm">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-neutral-100 text-[10px] font-bold text-neutral-400 uppercase bg-neutral-50/50">
+              <tr className="border-b border-gray-200 text-[10px] font-bold text-gray-400 uppercase bg-white">
                 <th className="p-4">Name</th>
                 <th className="p-4">Phone</th>
                 <th className="p-4">Status</th>
@@ -262,11 +262,11 @@ export default function Leads() {
                 <th className="p-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-50 text-xs">
+            <tbody className="divide-y divide-gray-100 text-xs">
               {filteredLeads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-neutral-50/30">
-                  <td className="p-4 font-semibold text-neutral-800">{lead.name}</td>
-                  <td className="p-4 text-neutral-500">{lead.phone}</td>
+                <tr key={lead.id} className="hover:bg-gray-50/60">
+                  <td className="p-4 font-semibold text-gray-900">{lead.name}</td>
+                  <td className="p-4 text-gray-500">{lead.phone}</td>
                   <td className="p-4">
                     <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-semibold ${getStatusBadge(lead.status)}`}>
                       {lead.status}
@@ -282,21 +282,21 @@ export default function Leads() {
                   <td className="p-4 text-right flex justify-end gap-2">
                     <button 
                       onClick={() => { setSelectedLead(lead); setShowQrModal(true); }}
-                      className="p-1.5 rounded-lg border border-neutral-100 hover:bg-neutral-50 text-neutral-500"
+                      className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-gray-500"
                       title="Generate Lead QR Code"
                     >
                       <QrCode className="w-3.5 h-3.5" />
                     </button>
                     <button 
                       onClick={() => { setSelectedLead(lead); setShowWhatsAppModal(true); }}
-                      className="p-1.5 rounded-lg border border-neutral-100 hover:bg-neutral-50 text-emerald-600"
+                      className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-emerald-600"
                       title="Send WhatsApp Template"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
                     </button>
                     <button 
                       onClick={() => { setSelectedLead(lead); setShowEmailModal(true); }}
-                      className="p-1.5 rounded-lg border border-neutral-100 hover:bg-neutral-50 text-blue-600"
+                      className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-blue-600"
                       title="Email Templates"
                     >
                       <Mail className="w-3.5 h-3.5" />
@@ -312,16 +312,16 @@ export default function Leads() {
       {/* Add Lead & OCR Business Card Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-lg bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative overflow-y-auto max-h-[90vh]">
+          <div className="w-full max-w-lg bg-white border border-gray-200 rounded-3xl shadow-2xl p-6 relative overflow-y-auto max-h-[90vh]">
             <button 
               onClick={() => setShowAddModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-gray-100 text-gray-400"
             >
               <X className="w-4 h-4" />
             </button>
 
             <div className="flex items-center gap-3 mb-6">
-              <h2 className="text-sm font-bold text-neutral-800">Create Sales Lead</h2>
+              <h2 className="text-sm font-bold text-gray-900">Create Sales Lead</h2>
               <button 
                 type="button"
                 onClick={handleOcrSimulate}
@@ -336,28 +336,28 @@ export default function Leads() {
             <form onSubmit={handleAddLead} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Lead Name *</label>
+                  <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Lead Name *</label>
                   <input 
                     required value={name} onChange={(e) => setName(e.target.value)}
                     placeholder="Medical Center Owner" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Phone Number *</label>
+                  <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Phone Number *</label>
                   <input 
                     required value={phone} onChange={(e) => setPhone(e.target.value)}
                     placeholder="9876543210" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Email Address</label>
+                  <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Email Address</label>
                   <input 
                     type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="contact@pharmacy.com" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Associated Medical Shop *</label>
+                  <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Associated Medical Shop *</label>
                   <select 
                     required value={shopId} onChange={(e) => setShopId(e.target.value)}
                     className="w-full p-2.5 rounded-xl border text-xs"
@@ -369,7 +369,7 @@ export default function Leads() {
                   </select>
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Pipeline Stage</label>
+                  <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Pipeline Stage</label>
                   <select 
                     value={status} onChange={(e) => setStatus(e.target.value)}
                     className="w-full p-2.5 rounded-xl border text-xs"
@@ -384,7 +384,7 @@ export default function Leads() {
                   </select>
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Lead Priority</label>
+                  <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Lead Priority</label>
                   <select 
                     value={priority} onChange={(e) => setPriority(e.target.value)}
                     className="w-full p-2.5 rounded-xl border text-xs"
@@ -397,7 +397,7 @@ export default function Leads() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Notes & Requirements</label>
+                <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Notes & Requirements</label>
                 <textarea 
                   rows={2} value={notes} onChange={(e) => setNotes(e.target.value)}
                   placeholder="Owner wants custom GST layout, uses Marg ERP currently..." className="w-full p-2.5 rounded-xl border text-xs"
@@ -407,13 +407,13 @@ export default function Leads() {
               <div className="flex justify-end gap-2 pt-4">
                 <button 
                   type="button" onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2.5 rounded-xl border border-neutral-200 text-xs font-semibold cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl border border-gray-200 text-xs font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button 
                   type="submit"
-                  className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs cursor-pointer transition-all"
+                  className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm cursor-pointer transition-all"
                 >
                   Create Lead
                 </button>
@@ -426,18 +426,18 @@ export default function Leads() {
       {/* QR Code Dialog */}
       {showQrModal && selectedLead && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-sm bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative text-center space-y-4">
+          <div className="w-full max-w-sm bg-white border border-gray-200 rounded-3xl shadow-2xl p-6 relative text-center space-y-4">
             <button 
               onClick={() => setShowQrModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-gray-100 text-gray-400"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <h3 className="text-xs font-bold text-neutral-800">Lead Digital Identifier QR</h3>
+            <h3 className="text-xs font-bold text-gray-900">Lead Digital Identifier QR</h3>
             
             {/* Mock QR Code graphic */}
-            <div className="mx-auto w-40 h-40 bg-white border border-neutral-100 p-2.5 rounded-2xl flex items-center justify-center shadow-xs">
+            <div className="mx-auto w-40 h-40 bg-white border border-gray-200 p-2.5 rounded-2xl flex items-center justify-center shadow-sm">
               <svg className="w-full h-full text-neutral-900" viewBox="0 0 100 100">
                 <rect x="10" y="10" width="20" height="20" fill="currentColor" />
                 <rect x="15" y="15" width="10" height="10" fill="white" />
@@ -456,8 +456,8 @@ export default function Leads() {
             </div>
             
             <div>
-              <p className="text-xs font-semibold text-neutral-800">{selectedLead.name}</p>
-              <span className="text-[10px] text-neutral-400">ID: {selectedLead.qrCode}</span>
+              <p className="text-xs font-semibold text-gray-900">{selectedLead.name}</p>
+              <span className="text-[10px] text-gray-400">ID: {selectedLead.qrCode}</span>
             </div>
           </div>
         </div>
@@ -466,19 +466,19 @@ export default function Leads() {
       {/* WhatsApp Modal */}
       {showWhatsAppModal && selectedLead && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-sm bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative space-y-4">
+          <div className="w-full max-w-sm bg-white border border-gray-200 rounded-3xl shadow-2xl p-6 relative space-y-4">
             <button 
               onClick={() => setShowWhatsAppModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-gray-100 text-gray-400"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <h3 className="text-xs font-bold text-neutral-800">One-Click WhatsApp Dispatch</h3>
+            <h3 className="text-xs font-bold text-gray-900">One-Click WhatsApp Dispatch</h3>
 
             <div className="space-y-3">
               <div className="space-y-1">
-                <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Select Template</label>
+                <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Select Template</label>
                 <select 
                   value={waTemplate} onChange={(e) => setWaTemplate(e.target.value)}
                   className="w-full p-2.5 rounded-xl border text-xs"
@@ -493,7 +493,7 @@ export default function Leads() {
 
               {waTemplate === 'Custom' && (
                 <div className="space-y-1">
-                  <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Message Text</label>
+                  <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Message Text</label>
                   <textarea 
                     rows={3} value={waCustomMessage} onChange={(e) => setWaCustomMessage(e.target.value)}
                     placeholder="Enter custom message text..." className="w-full p-2.5 rounded-xl border text-xs"
@@ -503,7 +503,7 @@ export default function Leads() {
 
               <button 
                 onClick={sendWhatsApp}
-                className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-semibold shadow-sm transition-all cursor-pointer"
               >
                 Launch WhatsApp Chat
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -516,19 +516,19 @@ export default function Leads() {
       {/* Email Modal */}
       {showEmailModal && selectedLead && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-sm bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative space-y-4">
+          <div className="w-full max-w-sm bg-white border border-gray-200 rounded-3xl shadow-2xl p-6 relative space-y-4">
             <button 
               onClick={() => setShowEmailModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-gray-100 text-gray-400"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <h3 className="text-xs font-bold text-neutral-800">Email Communication Center</h3>
+            <h3 className="text-xs font-bold text-gray-900">Email Communication Center</h3>
 
             <div className="space-y-3">
               <div className="space-y-1">
-                <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Templates</label>
+                <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Templates</label>
                 <select 
                   value={emailTemplate} onChange={(e) => setEmailTemplate(e.target.value)}
                   className="w-full p-2.5 rounded-xl border text-xs"
@@ -541,7 +541,7 @@ export default function Leads() {
 
               <button 
                 onClick={sendEmail}
-                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-xs font-semibold shadow-sm transition-all cursor-pointer"
               >
                 Send Email
                 <ExternalLink className="w-3.5 h-3.5" />

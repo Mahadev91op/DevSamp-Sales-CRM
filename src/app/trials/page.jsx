@@ -142,16 +142,16 @@ export default function TrialsAndSubscriptions() {
     <div className="space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-xl font-bold text-neutral-800 tracking-tight">Trials & Subscriptions</h1>
-        <p className="text-xs text-neutral-400 mt-1">Review active software evaluations and subscription renewals</p>
+        <h1 className="text-xl font-bold text-gray-900 tracking-tight">Trials & Subscriptions</h1>
+        <p className="text-xs text-gray-400 mt-1">Review active software evaluations and subscription renewals</p>
       </div>
 
       {/* Grid: Trials & Subscriptions list */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Active Trials section */}
-        <div className="bg-white border border-neutral-100 p-6 rounded-2xl shadow-xs space-y-4">
-          <h3 className="text-xs font-semibold text-neutral-800 flex items-center gap-2">
+        <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm space-y-4">
+          <h3 className="text-xs font-semibold text-gray-900 flex items-center gap-2">
             <Layers className="w-4 h-4 text-blue-600" />
             Software Trial License Evaluations
           </h3>
@@ -160,12 +160,12 @@ export default function TrialsAndSubscriptions() {
             {trials.map(trial => (
               <div 
                 key={trial.id}
-                className="p-4 rounded-xl border border-neutral-100 bg-neutral-50/50 space-y-3"
+                className="p-4 rounded-xl border border-gray-200 bg-white space-y-3"
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h4 className="font-semibold text-xs text-neutral-800">{trial.storeName}</h4>
-                    <p className="text-[10px] text-neutral-400 mt-0.5">Ends: {trial.endDate}</p>
+                    <h4 className="font-semibold text-xs text-gray-900">{trial.storeName}</h4>
+                    <p className="text-[10px] text-gray-400 mt-0.5">Ends: {trial.endDate}</p>
                   </div>
                   <span className={`inline-block px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
                     trial.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'
@@ -176,11 +176,11 @@ export default function TrialsAndSubscriptions() {
 
                 {/* Days remaining slider */}
                 <div className="space-y-1">
-                  <div className="flex justify-between text-[10px] font-medium text-neutral-500">
+                  <div className="flex justify-between text-[10px] font-medium text-gray-500">
                     <span>Evaluations Timeline</span>
                     <span>{trial.daysRemaining} days left</span>
                   </div>
-                  <div className="w-full bg-neutral-200 h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
                     <div 
                       className={`h-full ${trial.daysRemaining > 3 ? 'bg-blue-600' : 'bg-red-500'}`} 
                       style={{ width: `${Math.min((trial.daysRemaining / 14) * 100, 100)}%` }}
@@ -189,7 +189,7 @@ export default function TrialsAndSubscriptions() {
                 </div>
 
                 {/* Video feedback indicator */}
-                <div className="flex items-center gap-1.5 text-[9px] font-semibold text-neutral-500">
+                <div className="flex items-center gap-1.5 text-[9px] font-semibold text-gray-500">
                   <Video className="w-3.5 h-3.5" />
                   <span>Video Feedback status:</span>
                   <span className={trial.videoFeedback === 'Received' ? 'text-emerald-500' : 'text-amber-500'}>
@@ -201,7 +201,7 @@ export default function TrialsAndSubscriptions() {
                 <div className="flex gap-2 pt-2">
                   <button 
                     onClick={() => handleExtendTrial(trial.id)}
-                    className="flex-1 px-3 py-1.5 rounded-lg border border-neutral-200 hover:bg-neutral-100 text-[10px] font-semibold cursor-pointer"
+                    className="flex-1 px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-100 text-[10px] font-semibold cursor-pointer"
                   >
                     Extend +7 Days
                   </button>
@@ -218,8 +218,8 @@ export default function TrialsAndSubscriptions() {
         </div>
 
         {/* Subscriptions Renewals and Invoices section */}
-        <div className="bg-white border border-neutral-100 p-6 rounded-2xl shadow-xs space-y-4">
-          <h3 className="text-xs font-semibold text-neutral-800 flex items-center gap-2">
+        <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm space-y-4">
+          <h3 className="text-xs font-semibold text-gray-900 flex items-center gap-2">
             <CreditCard className="w-4 h-4 text-emerald-600" />
             Paid SaaS Subscription Renewals
           </h3>
@@ -228,42 +228,42 @@ export default function TrialsAndSubscriptions() {
             {subscriptions.map(sub => (
               <div 
                 key={sub.id}
-                className="p-4 rounded-xl border border-neutral-100 bg-neutral-50/50 space-y-4"
+                className="p-4 rounded-xl border border-gray-200 bg-white space-y-4"
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h4 className="font-semibold text-xs text-neutral-800">{sub.storeName}</h4>
-                    <p className="text-[10px] text-neutral-400 mt-0.5">{sub.plan} — ₹{parseInt(sub.amount).toLocaleString('en-IN')}</p>
+                    <h4 className="font-semibold text-xs text-gray-900">{sub.storeName}</h4>
+                    <p className="text-[10px] text-gray-400 mt-0.5">{sub.plan} — ₹{parseInt(sub.amount).toLocaleString('en-IN')}</p>
                   </div>
                   <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-600 text-[9px] font-bold uppercase tracking-wider">
                     {sub.status}
                   </span>
                 </div>
 
-                <div className="flex justify-between text-[10px] font-semibold text-neutral-500 pt-2 border-t">
+                <div className="flex justify-between text-[10px] font-semibold text-gray-500 pt-2 border-t">
                   <span>Next Renewal: {sub.renewalDate}</span>
                 </div>
 
                 {/* Invoices list */}
                 <div className="space-y-2">
-                  <p className="text-[9px] font-bold text-neutral-400 uppercase tracking-wide">Billing History</p>
+                  <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wide">Billing History</p>
                   {sub.invoices.map(inv => (
                     <div 
                       key={inv.id}
                       className="flex items-center justify-between p-2 bg-white border rounded-lg text-[10px]"
                     >
                       <div className="flex items-center gap-2">
-                        <FileText className="w-3.5 h-3.5 text-neutral-400" />
+                        <FileText className="w-3.5 h-3.5 text-gray-400" />
                         <div>
-                          <span className="font-semibold text-neutral-700">{inv.id}</span>
-                          <p className="text-[8px] text-neutral-400">{inv.date}</p>
+                          <span className="font-semibold text-gray-800">{inv.id}</span>
+                          <p className="text-[8px] text-gray-400">{inv.date}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="font-bold text-neutral-700">₹{inv.amount}</span>
+                        <span className="font-bold text-gray-800">₹{inv.amount}</span>
                         <button 
                           onClick={() => setSelectedInvoice(inv)}
-                          className="p-1 rounded hover:bg-neutral-100 text-blue-600"
+                          className="p-1 rounded hover:bg-gray-100 text-blue-600"
                           title="Generate printable invoice details"
                         >
                           <Download className="w-3.5 h-3.5" />
@@ -281,22 +281,22 @@ export default function TrialsAndSubscriptions() {
       {/* Convert Trial to Subscription Modal */}
       {showConvertModal && convertTrial && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-sm bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative">
+          <div className="w-full max-w-sm bg-white border border-gray-200 rounded-3xl shadow-2xl p-6 relative">
             <button 
               onClick={() => setShowConvertModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-gray-100 text-gray-400"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <h2 className="text-sm font-bold text-neutral-800 mb-4">Upgrade to Paid Subscription</h2>
-            <p className="text-[10px] text-neutral-400 leading-normal mb-4">
+            <h2 className="text-sm font-bold text-gray-900 mb-4">Upgrade to Paid Subscription</h2>
+            <p className="text-[10px] text-gray-400 leading-normal mb-4">
               Select a licensing plan to initialize standard billing and download GST invoice history for <strong>{convertTrial.storeName}</strong>.
             </p>
 
             <form onSubmit={handleConvertTrial} className="space-y-4">
               <div className="space-y-1">
-                <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Subscription Plan</label>
+                <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Subscription Plan</label>
                 <select 
                   value={subPlan} 
                   onChange={(e) => {
@@ -311,16 +311,16 @@ export default function TrialsAndSubscriptions() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Total License Fee (₹)</label>
+                <label className="text-[9px] font-semibold text-gray-500 uppercase tracking-wide">Total License Fee (₹)</label>
                 <input 
                   disabled value={`₹${parseInt(subAmount).toLocaleString('en-IN')} + 18% GST`}
-                  className="w-full p-2.5 rounded-xl border text-xs bg-neutral-50 text-neutral-500"
+                  className="w-full p-2.5 rounded-xl border text-xs bg-gray-50 text-gray-500"
                 />
               </div>
 
               <button 
                 type="submit"
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-semibold shadow-xs transition-all cursor-pointer"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-semibold shadow-sm transition-all cursor-pointer"
               >
                 Confirm Payment & Activate License
               </button>
@@ -332,36 +332,36 @@ export default function TrialsAndSubscriptions() {
       {/* Invoice Details Drawer Modal */}
       {selectedInvoice && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-md bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative space-y-4">
+          <div className="w-full max-w-md bg-white border border-gray-200 rounded-3xl shadow-2xl p-6 relative space-y-4">
             <button 
               onClick={() => setSelectedInvoice(null)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-gray-100 text-gray-400"
             >
               <X className="w-4 h-4" />
             </button>
 
             {/* Printable Invoice Header */}
             <div className="text-center pb-4 border-b border-dashed">
-              <h3 className="font-bold text-xs text-neutral-800">TAX INVOICE</h3>
-              <p className="text-[9px] text-neutral-400">DevSamp CRM Suite Inc.</p>
-              <p className="text-[9px] text-neutral-400">GSTIN: 27DEVSAMP999A1Z1</p>
+              <h3 className="font-bold text-xs text-gray-900">TAX INVOICE</h3>
+              <p className="text-[9px] text-gray-400">DevSamp CRM Suite Inc.</p>
+              <p className="text-[9px] text-gray-400">GSTIN: 27DEVSAMP999A1Z1</p>
             </div>
 
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
-                <span className="text-neutral-400">Invoice ID:</span>
+                <span className="text-gray-400">Invoice ID:</span>
                 <span className="font-bold">{selectedInvoice.id}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-400">Date:</span>
+                <span className="text-gray-400">Date:</span>
                 <span>{selectedInvoice.date}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-400">Payment Method:</span>
+                <span className="text-gray-400">Payment Method:</span>
                 <span>UPI / Netbanking</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-400">Status:</span>
+                <span className="text-gray-400">Status:</span>
                 <span className="text-emerald-600 font-bold uppercase tracking-wider">{selectedInvoice.status}</span>
               </div>
             </div>
@@ -371,11 +371,11 @@ export default function TrialsAndSubscriptions() {
                 <span>Base Software Charge</span>
                 <span>₹{parseFloat(selectedInvoice.amount).toLocaleString('en-IN')}</span>
               </div>
-              <div className="flex justify-between text-neutral-400">
+              <div className="flex justify-between text-gray-400">
                 <span>CGST (9%)</span>
                 <span>₹{(parseFloat(selectedInvoice.gst)/2).toFixed(0)}</span>
               </div>
-              <div className="flex justify-between text-neutral-400">
+              <div className="flex justify-between text-gray-400">
                 <span>SGST (9%)</span>
                 <span>₹{(parseFloat(selectedInvoice.gst)/2).toFixed(0)}</span>
               </div>
@@ -391,7 +391,7 @@ export default function TrialsAndSubscriptions() {
             <div className="flex gap-2 pt-4">
               <button 
                 onClick={() => handleDownloadInvoice(selectedInvoice)}
-                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl text-xs font-semibold shadow-xs cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl text-xs font-semibold shadow-sm cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
                 Download PDF

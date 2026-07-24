@@ -61,10 +61,10 @@ export default function Reports() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="h-10 w-48 bg-neutral-200 rounded animate-pulse" />
+        <div className="h-10 w-48 bg-gray-200 rounded animate-pulse" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="h-80 bg-neutral-200 rounded-2xl animate-pulse" />
-          <div className="h-80 bg-neutral-200 rounded-2xl animate-pulse" />
+          <div className="h-80 bg-gray-200 rounded-2xl animate-pulse" />
+          <div className="h-80 bg-gray-200 rounded-2xl animate-pulse" />
         </div>
       </div>
     );
@@ -75,13 +75,13 @@ export default function Reports() {
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-neutral-800 tracking-tight">Intelligence & Reports</h1>
-          <p className="text-xs text-neutral-400 mt-1">Review team performance, loss reasons, and competitor analytics</p>
+          <h1 className="text-xl font-bold text-gray-900 tracking-tight">Intelligence & Reports</h1>
+          <p className="text-xs text-gray-400 mt-1">Review team performance, loss reasons, and competitor analytics</p>
         </div>
         <div className="flex gap-2">
           <button 
             onClick={() => handleExportCSV('Sales Pipeline Summary')}
-            className="flex items-center gap-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 px-3 py-2 rounded-xl text-xs font-semibold cursor-pointer select-none transition-all"
+            className="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-2 rounded-xl text-xs font-semibold cursor-pointer select-none transition-all"
           >
             <Download className="w-3.5 h-3.5" />
             Export CSV
@@ -91,35 +91,35 @@ export default function Reports() {
 
       {/* Highlights Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white border border-neutral-100 p-5 rounded-2xl shadow-xs">
-          <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wide">Top Performing City</p>
+        <div className="bg-white border border-gray-200 p-5 rounded-2xl shadow-sm">
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Top Performing City</p>
           <div className="flex items-center gap-3 mt-3">
             <MapPin className="w-5 h-5 text-blue-600" />
             <div>
-              <p className="text-xs font-bold text-neutral-800">Mumbai</p>
-              <span className="text-[9px] text-neutral-400">14 active client shops</span>
+              <p className="text-xs font-bold text-gray-900">Mumbai</p>
+              <span className="text-[9px] text-gray-400">14 active client shops</span>
             </div>
           </div>
         </div>
 
-        <div className="bg-white border border-neutral-100 p-5 rounded-2xl shadow-xs">
-          <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wide">Avg Closing Speed</p>
+        <div className="bg-white border border-gray-200 p-5 rounded-2xl shadow-sm">
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Avg Closing Speed</p>
           <div className="flex items-center gap-3 mt-3">
             <Clock className="w-5 h-5 text-emerald-600" />
             <div>
-              <p className="text-xs font-bold text-neutral-800">8.5 Days</p>
-              <span className="text-[9px] text-neutral-400">Demo booking to signature</span>
+              <p className="text-xs font-bold text-gray-900">8.5 Days</p>
+              <span className="text-[9px] text-gray-400">Demo booking to signature</span>
             </div>
           </div>
         </div>
 
-        <div className="bg-white border border-neutral-100 p-5 rounded-2xl shadow-xs">
-          <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-wide">Top Executive Performer</p>
+        <div className="bg-white border border-gray-200 p-5 rounded-2xl shadow-sm">
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">Top Executive Performer</p>
           <div className="flex items-center gap-3 mt-3">
             <UserCheck className="w-5 h-5 text-purple-600" />
             <div>
-              <p className="text-xs font-bold text-neutral-800">Ravi Kumar</p>
-              <span className="text-[9px] text-neutral-400">14 deals closed this month</span>
+              <p className="text-xs font-bold text-gray-900">Ravi Kumar</p>
+              <span className="text-[9px] text-gray-400">14 deals closed this month</span>
             </div>
           </div>
         </div>
@@ -129,10 +129,10 @@ export default function Reports() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Competitor distribution graph */}
-        <div className="bg-white border border-neutral-100 p-6 rounded-2xl shadow-xs space-y-4">
+        <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm space-y-4">
           <div>
-            <h3 className="text-xs font-semibold text-neutral-800">Market Intelligence (ERP Share)</h3>
-            <p className="text-[10px] text-neutral-400 mt-0.5">Competitor packages currently running at visited shops</p>
+            <h3 className="text-xs font-semibold text-gray-900">Market Intelligence (ERP Share)</h3>
+            <p className="text-[10px] text-gray-400 mt-0.5">Competitor packages currently running at visited shops</p>
           </div>
           <div className="h-60 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -158,10 +158,10 @@ export default function Reports() {
         </div>
 
         {/* Loss reasons graph */}
-        <div className="bg-white border border-neutral-100 p-6 rounded-2xl shadow-xs space-y-4">
+        <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm space-y-4">
           <div>
-            <h3 className="text-xs font-semibold text-neutral-800">Deal Loss Reasons Analysis</h3>
-            <p className="text-[10px] text-neutral-400 mt-0.5">Identified deal blockers reported by sales team</p>
+            <h3 className="text-xs font-semibold text-gray-900">Deal Loss Reasons Analysis</h3>
+            <p className="text-[10px] text-gray-400 mt-0.5">Identified deal blockers reported by sales team</p>
           </div>
           <div className="h-60 w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -184,30 +184,30 @@ export default function Reports() {
       </div>
 
       {/* Performers leaderboard table */}
-      <div className="bg-white border border-neutral-100 p-6 rounded-2xl shadow-xs space-y-4">
+      <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm space-y-4">
         <div>
-          <h3 className="text-xs font-semibold text-neutral-800">Team Leaderboard Performance</h3>
-          <p className="text-[10px] text-neutral-400 mt-0.5">Sales representative targets and score status</p>
+          <h3 className="text-xs font-semibold text-gray-900">Team Leaderboard Performance</h3>
+          <p className="text-[10px] text-gray-400 mt-0.5">Sales representative targets and score status</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b border-neutral-100 text-[10px] font-bold text-neutral-400 uppercase bg-neutral-50/50">
+              <tr className="border-b border-gray-200 text-[10px] font-bold text-gray-400 uppercase bg-white">
                 <th className="p-3">Representative</th>
                 <th className="p-3">Deals Closed</th>
                 <th className="p-3">Performance Score</th>
                 <th className="p-3 text-right">Commission Tier</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-50">
+            <tbody className="divide-y divide-gray-100">
               {executiveLeaderboard.map((exec, idx) => (
-                <tr key={idx} className="hover:bg-neutral-50/30">
-                  <td className="p-3 font-semibold text-neutral-800">{exec.name}</td>
-                  <td className="p-3 text-neutral-500">{exec.deals}</td>
+                <tr key={idx} className="hover:bg-gray-50/60">
+                  <td className="p-3 font-semibold text-gray-900">{exec.name}</td>
+                  <td className="p-3 text-gray-500">{exec.deals}</td>
                   <td className="p-3">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-neutral-800">{exec.score}/100</span>
-                      <div className="w-20 bg-neutral-100 h-1.5 rounded-full overflow-hidden">
+                      <span className="font-semibold text-gray-900">{exec.score}/100</span>
+                      <div className="w-20 bg-gray-100 h-1.5 rounded-full overflow-hidden">
                         <div className="h-full bg-blue-600" style={{ width: `${exec.score}%` }} />
                       </div>
                     </div>

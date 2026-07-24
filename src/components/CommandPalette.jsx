@@ -137,26 +137,26 @@ export default function CommandPalette() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -8 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="w-full max-w-lg overflow-hidden bg-white border border-neutral-100 rounded-2xl shadow-2xl"
+            className="w-full max-w-lg overflow-hidden bg-white border border-gray-100 rounded-2xl shadow-2xl"
             onKeyDown={handleKeyDown}
           >
             {/* Input Bar */}
-            <div className="flex items-center gap-3 px-4 h-12 border-b border-neutral-100">
-              <Search className="w-4 h-4 text-neutral-400" />
+            <div className="flex items-center gap-3 px-4 h-12 border-b border-gray-100">
+              <Search className="w-4 h-4 text-gray-400" />
               <input 
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search leads, shops, tasks or type command..."
-                className="flex-1 bg-transparent border-0 outline-none text-xs text-neutral-800 placeholder-neutral-400 py-2"
+                className="flex-1 bg-transparent border-0 outline-none text-xs text-gray-900 placeholder-neutral-400 py-2"
               />
-              <span className="text-[10px] bg-neutral-100 text-neutral-500 px-1.5 py-0.5 rounded border border-neutral-200">ESC</span>
+              <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded border border-gray-200">ESC</span>
             </div>
 
             {/* List Body */}
             <div className="max-h-72 overflow-y-auto p-2 space-y-1">
               {allResults.length === 0 ? (
-                <div className="py-8 text-center text-xs text-neutral-400">
+                <div className="py-8 text-center text-xs text-gray-400">
                   No results found for "{query}"
                 </div>
               ) : (
@@ -170,13 +170,13 @@ export default function CommandPalette() {
                       className={`flex items-center gap-3 w-full px-3 py-2 rounded-lg text-left transition-all ${
                         isSelected 
                           ? 'bg-blue-500 text-white' 
-                          : 'text-neutral-700 hover:bg-neutral-50'
+                          : 'text-gray-800 hover:bg-gray-50'
                       }`}
                     >
-                      <Icon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-neutral-400'}`} />
+                      <Icon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-gray-400'}`} />
                       <div className="truncate">
                         <p className="text-xs font-medium leading-none">{item.name}</p>
-                        <span className={`text-[10px] leading-tight ${isSelected ? 'text-blue-100' : 'text-neutral-400'}`}>
+                        <span className={`text-[10px] leading-tight ${isSelected ? 'text-blue-100' : 'text-gray-400'}`}>
                           {item.sub}
                         </span>
                       </div>

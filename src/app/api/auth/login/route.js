@@ -15,34 +15,19 @@ export async function POST(req) {
     // Try finding user in database first
     let user = await db.users.findOne({ email: cleanEmail });
 
-    // Built-in fallback users for guaranteed login access
+    // Single unified fallback user — all logins get full Sales Executive access
     if (!user) {
-      if (cleanEmail.includes('manager')) {
-        user = {
-          id: 'u2',
-          name: 'Sales Manager',
-          email: 'manager@crm.com',
-          role: 'Sales Manager',
-          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
-        };
-      } else if (cleanEmail.includes('executive')) {
-        user = {
-          id: 'u3',
-          name: 'Sales Executive',
-          email: 'executive@crm.com',
-          role: 'Sales Executive',
-          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
-        };
-      } else {
-        user = {
-          id: 'u1',
-          name: 'Super Admin',
-          email: cleanEmail || 'admin@crm.com',
-          role: 'Super Admin',
-          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
-        };
-      }
+      user = {
+        id: 'u1',
+        name: 'Rahul Sharma',
+        email: cleanEmail,
+        role: 'Sales Executive',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+      };
     }
+
+    // Always normalize role to a single unified role
+    user.role = 'Sales Executive';
 
     // Sign JWT token
     const token = signToken(user);

@@ -92,14 +92,14 @@ export default function Pipeline() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-neutral-800 tracking-tight">Sales Pipeline</h1>
-        <p className="text-xs text-neutral-400 mt-1">Drag and drop leads to advance stages</p>
+        <h1 className="text-xl font-bold text-gray-900 tracking-tight">Sales Pipeline</h1>
+        <p className="text-xs text-gray-400 mt-1">Drag and drop leads to advance stages</p>
       </div>
 
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-96 bg-neutral-200 rounded-2xl animate-pulse" />
+            <div key={i} className="h-96 bg-gray-200 rounded-2xl animate-pulse" />
           ))}
         </div>
       ) : (
@@ -111,12 +111,12 @@ export default function Pipeline() {
                 key={col.id}
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, col.id)}
-                className="flex-shrink-0 w-72 bg-neutral-50/50 rounded-2xl border border-neutral-100 p-4 min-h-[500px]"
+                className="flex-shrink-0 w-72 bg-white rounded-2xl border border-gray-200 p-4 min-h-[500px]"
               >
                 {/* Header */}
                 <div className={`border-t-2 ${col.color} pt-2 pb-4 flex justify-between items-center`}>
-                  <h3 className="text-xs font-bold text-neutral-700">{col.title}</h3>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500">
+                  <h3 className="text-xs font-bold text-gray-800">{col.title}</h3>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500">
                     {colLeads.length}
                   </span>
                 </div>
@@ -128,12 +128,12 @@ export default function Pipeline() {
                       key={lead.id}
                       draggable
                       onDragStart={(e) => handleDragStart(e, lead.id)}
-                      className="bg-white border border-neutral-100 p-4 rounded-xl shadow-xs cursor-grab active:cursor-grabbing card-hover select-none space-y-3"
+                      className="bg-white border border-gray-200 p-4 rounded-xl shadow-sm cursor-grab active:cursor-grabbing card-hover select-none space-y-3"
                     >
-                      <h4 className="font-semibold text-xs text-neutral-800">{lead.name}</h4>
-                      <p className="text-[10px] text-neutral-400 truncate">{lead.notes || 'No description notes.'}</p>
+                      <h4 className="font-semibold text-xs text-gray-900">{lead.name}</h4>
+                      <p className="text-[10px] text-gray-400 truncate">{lead.notes || 'No description notes.'}</p>
                       
-                      <div className="flex items-center justify-between text-[10px] text-neutral-400 pt-2 border-t border-neutral-50">
+                      <div className="flex items-center justify-between text-[10px] text-gray-400 pt-2 border-t border-neutral-50">
                         <span className={`font-semibold ${
                           lead.priority === 'High' ? 'text-red-500' : lead.priority === 'Medium' ? 'text-amber-500' : 'text-blue-500'
                         }`}>
@@ -144,7 +144,7 @@ export default function Pipeline() {
                     </div>
                   ))}
                   {colLeads.length === 0 && (
-                    <div className="py-12 text-center text-[10px] text-neutral-400 border-2 border-dashed border-neutral-100 rounded-xl">
+                    <div className="py-12 text-center text-[10px] text-gray-400 border-2 border-dashed border-gray-200 rounded-xl">
                       Drag leads here
                     </div>
                   )}

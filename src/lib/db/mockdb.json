@@ -2,27 +2,11 @@
   "users": [
     {
       "id": "u1",
-      "name": "Super Admin",
+      "name": "Rahul Sharma",
       "email": "admin@crm.com",
       "password": "$2a$10$wK1G0fD78kXpQvS/rW9hAed6PZJmXW3yvJbFk6.8R2qQo0eP2uWjS",
-      "role": "Super Admin",
-      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": "u2",
-      "name": "Sales Manager",
-      "email": "manager@crm.com",
-      "password": "$2a$10$q0iRk5N/0V/W521vJ671keoM8S29T1dI2yK85eD/K5yv3cZ0H2q92",
-      "role": "Sales Manager",
-      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
-    },
-    {
-      "id": "u3",
-      "name": "Sales Executive",
-      "email": "executive@crm.com",
-      "password": "$2a$10$d1gXU0mF99H.aK81ke5ZYeK.Y8U489e.Z3hH0yY10rS.u3y/T2z3m",
       "role": "Sales Executive",
-      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80"
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
     }
   ],
   "shops": [
@@ -150,81 +134,87 @@
   "leads": [
     {
       "id": "l1",
-      "name": "Care Plus Pharmacy",
+      "name": "Dr. Ramesh Sharma",
       "shopId": "s1",
       "email": "ramesh@careplus.com",
       "phone": "9876543210",
       "status": "Trial Started",
       "priority": "High",
       "assignedTo": "u1",
-      "notes": "Interested in switching from Marg ERP due to pricing and lack of mobile app.",
+      "notes": "Interested in switching from Marg ERP. Liked mobile app feature.",
       "qrCode": "DEV-LEAD-s1",
-      "businessCardPhoto": ""
+      "businessCardPhoto": "",
+      "createdAt": "2026-07-10"
     },
     {
       "id": "l2",
-      "name": "Apex Health Center",
+      "name": "Amit Verma",
       "shopId": "s2",
       "email": "amit@apexhealth.com",
       "phone": "9876543211",
-      "status": "Contacted",
+      "status": "Demo Booked",
       "priority": "Medium",
       "assignedTo": "u1",
-      "notes": "Wants a simple software for billing. Booked a demo.",
+      "notes": "Wants a simple billing solution. Demo booked for next Monday.",
       "qrCode": "DEV-LEAD-s2",
-      "businessCardPhoto": ""
+      "businessCardPhoto": "",
+      "createdAt": "2026-07-14"
     },
     {
       "id": "l3",
-      "name": "Wellness Chemists",
+      "name": "Mrs. Neha Gupta",
       "shopId": "s3",
       "email": "neha@wellnesschem.com",
       "phone": "9876543212",
       "status": "Negotiation",
       "priority": "High",
       "assignedTo": "u1",
-      "notes": "Bigger store. Demanding a discount on yearly plan.",
+      "notes": "Bigger store. Demanding 20% discount on yearly plan.",
       "qrCode": "DEV-LEAD-s3",
-      "businessCardPhoto": ""
+      "businessCardPhoto": "",
+      "createdAt": "2026-07-18"
     },
     {
       "id": "l4",
-      "name": "MedLife Medicos",
+      "name": "Suresh Patel",
       "shopId": "s4",
       "email": "suresh@medlifemedicos.com",
       "phone": "9876543213",
-      "status": "Demo Booked",
+      "status": "Contacted",
       "priority": "High",
       "assignedTo": "u1",
-      "notes": "Fast growing pharmacy chain interested in multi-store reporting.",
+      "notes": "Growing chain interested in multi-store reporting dashboard.",
       "qrCode": "DEV-LEAD-s4",
-      "businessCardPhoto": ""
+      "businessCardPhoto": "",
+      "createdAt": "2026-07-20"
     },
     {
       "id": "l5",
-      "name": "Apollo Medical Store",
+      "name": "K. V. Rao",
       "shopId": "s5",
       "email": "kvrao@apollomeds.com",
       "phone": "9876543214",
       "status": "Won",
       "priority": "High",
       "assignedTo": "u1",
-      "notes": "Converted to 1-Year Pro Plan subscription.",
+      "notes": "Converted to 1-Year Pro Plan. Invoice sent.",
       "qrCode": "DEV-LEAD-s5",
-      "businessCardPhoto": ""
+      "businessCardPhoto": "",
+      "createdAt": "2026-07-05"
     },
     {
       "id": "l6",
-      "name": "Sanjeevani Medicals",
+      "name": "Vikas Deshmukh",
       "shopId": "s6",
       "email": "vikas@sanjeevani.com",
       "phone": "9876543215",
       "status": "New",
       "priority": "Medium",
       "assignedTo": "u1",
-      "notes": "Fresh lead collected from medical representative visit.",
+      "notes": "Fresh cold lead from medical rep visit.",
       "qrCode": "DEV-LEAD-s6",
-      "businessCardPhoto": ""
+      "businessCardPhoto": "",
+      "createdAt": "2026-07-24"
     }
   ],
   "visits": [
@@ -237,10 +227,8 @@
       "executiveId": "u1",
       "purpose": "Software Demo",
       "outcome": "Interested",
-      "notes": "Gave a complete demo of billing and inventory modules. Client liked the UI.",
-      "photos": [
-        "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&q=40"
-      ],
+      "notes": "Full demo of billing and inventory. Client liked mobile sync.",
+      "photos": ["https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&q=40"],
       "signature": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"50\"><path d=\"M 10 30 Q 30 10 50 30 T 90 30\" fill=\"none\" stroke=\"black\" stroke-width=\"2\"/></svg>",
       "checkInTime": "2026-07-24T11:00:00.000Z",
       "checkOutTime": "2026-07-24T11:45:00.000Z",
@@ -256,19 +244,54 @@
       "executiveId": "u1",
       "purpose": "Cold Visit",
       "outcome": "Scheduled Demo",
-      "notes": "Store owner requested demo tomorrow afternoon.",
+      "notes": "Owner requested proper demo for next week.",
       "photos": [],
       "signature": "",
       "checkInTime": "2026-07-23T15:30:00.000Z",
       "checkOutTime": "2026-07-23T15:50:00.000Z",
       "duration": "20 mins",
       "location": "12.9716, 77.5946"
+    },
+    {
+      "id": "v3",
+      "shopId": "s3",
+      "leadId": "l3",
+      "date": "2026-07-22",
+      "time": "10:00 AM",
+      "executiveId": "u1",
+      "purpose": "Negotiation Meeting",
+      "outcome": "Pending Decision",
+      "notes": "Discussed pricing. Owner wants additional discount on 2-year plan.",
+      "photos": [],
+      "signature": "",
+      "checkInTime": "2026-07-22T10:00:00.000Z",
+      "checkOutTime": "2026-07-22T11:00:00.000Z",
+      "duration": "60 mins",
+      "location": "28.4595, 77.0266"
+    },
+    {
+      "id": "v4",
+      "shopId": "s5",
+      "leadId": "l5",
+      "date": "2026-07-20",
+      "time": "02:00 PM",
+      "executiveId": "u1",
+      "purpose": "Contract Signing",
+      "outcome": "Converted",
+      "notes": "Signed 1-year Pro plan. Payment received. Installation scheduled.",
+      "photos": ["https://images.unsplash.com/photo-1576602976047-174e57a47881?w=400&q=40"],
+      "signature": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"50\"><path d=\"M 5 40 Q 25 5 50 40 T 95 40\" fill=\"none\" stroke=\"black\" stroke-width=\"2\"/></svg>",
+      "checkInTime": "2026-07-20T14:00:00.000Z",
+      "checkOutTime": "2026-07-20T15:00:00.000Z",
+      "duration": "60 mins",
+      "location": "17.3850, 78.4867"
     }
   ],
   "tasks": [
     {
       "id": "t1",
       "title": "On-site Installation at MedLife Medicos",
+      "description": "Install DevSamp software on 4 billing terminals",
       "dueDate": "2026-07-25",
       "priority": "High",
       "completed": false,
@@ -277,23 +300,43 @@
     },
     {
       "id": "t2",
-      "title": "Send GST Tax Invoice to Apollo Medical Store",
+      "title": "Send GST Invoice to Apollo Medical Store",
+      "description": "Generate and email INV-2026-001 for yearly subscription",
       "dueDate": "2026-07-24",
       "priority": "Medium",
-      "completed": false,
+      "completed": true,
       "assignedTo": "u1",
-      "shopId": "s5",
-      "updatedAt": "2026-07-24T12:46:46.651Z"
+      "shopId": "s5"
     },
     {
       "id": "t3",
-      "title": "Follow up with Dr. Ramesh for Trial Feedback",
+      "title": "Trial Feedback Call with Dr. Ramesh",
+      "description": "Collect feedback after 10 days of Care Plus trial",
       "dueDate": "2026-07-26",
       "priority": "High",
-      "completed": true,
+      "completed": false,
       "assignedTo": "u1",
-      "shopId": "s1",
-      "updatedAt": "2026-07-24T12:46:45.652Z"
+      "shopId": "s1"
+    },
+    {
+      "id": "t4",
+      "title": "Send Demo Confirmation to Amit Verma",
+      "description": "WhatsApp and email the demo link for Monday",
+      "dueDate": "2026-07-25",
+      "priority": "Medium",
+      "completed": false,
+      "assignedTo": "u1",
+      "shopId": "s2"
+    },
+    {
+      "id": "t5",
+      "title": "Prepare Negotiation Offer for Wellness Chemists",
+      "description": "Create discounted 2-year plan proposal for Neha Gupta",
+      "dueDate": "2026-07-27",
+      "priority": "High",
+      "completed": false,
+      "assignedTo": "u1",
+      "shopId": "s3"
     }
   ],
   "trials": [
@@ -304,7 +347,8 @@
       "startDate": "2026-07-15",
       "endDate": "2026-08-02",
       "status": "Active",
-      "daysRemaining": 9
+      "daysRemaining": 9,
+      "plan": "Standard Trial"
     },
     {
       "id": "tr2",
@@ -313,7 +357,18 @@
       "startDate": "2026-07-20",
       "endDate": "2026-07-28",
       "status": "Active",
-      "daysRemaining": 4
+      "daysRemaining": 4,
+      "plan": "Premium Trial"
+    },
+    {
+      "id": "tr3",
+      "shopId": "s2",
+      "leadId": "l2",
+      "startDate": "2026-07-18",
+      "endDate": "2026-08-01",
+      "status": "Active",
+      "daysRemaining": 8,
+      "plan": "Standard Trial"
     }
   ],
   "subscriptions": [
@@ -341,6 +396,12 @@
       "name": "Vyapar",
       "marketShare": "25%",
       "weakness": "Lacks batch inventory & expiry alerts"
+    },
+    {
+      "id": "c3",
+      "name": "GoFrugal",
+      "marketShare": "15%",
+      "weakness": "High setup cost and slow support"
     }
   ],
   "activities": [
@@ -348,15 +409,36 @@
       "id": "a1",
       "userId": "u1",
       "type": "STORE_REGISTERED",
-      "description": "Registered new medical store: Sanjeevani Medicals (Pune)",
+      "description": "Registered new store: Sanjeevani Medicals (Pune)",
       "timestamp": "2026-07-24T10:15:00.000Z"
     },
     {
       "id": "a2",
       "userId": "u1",
       "type": "TRIAL_STARTED",
-      "description": "Started 14-day software trial for Care Plus Pharmacy",
+      "description": "Started 14-day trial for Care Plus Pharmacy",
       "timestamp": "2026-07-24T11:00:00.000Z"
+    },
+    {
+      "id": "a3",
+      "userId": "u1",
+      "type": "DEAL_WON",
+      "description": "Converted Apollo Medical Store to Yearly Pro Plan",
+      "timestamp": "2026-07-20T14:30:00.000Z"
+    },
+    {
+      "id": "a4",
+      "userId": "u1",
+      "type": "VISIT_LOGGED",
+      "description": "Visit logged at MedLife Medicos, Bengaluru",
+      "timestamp": "2026-07-23T15:50:00.000Z"
+    },
+    {
+      "id": "a5",
+      "userId": "u1",
+      "type": "LEAD_CREATED",
+      "description": "New lead added: Vikas Deshmukh — Sanjeevani Medicals",
+      "timestamp": "2026-07-24T09:00:00.000Z"
     }
   ]
 }
