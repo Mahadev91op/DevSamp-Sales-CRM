@@ -71,28 +71,28 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         }`}
       >
         {/* Brand Logo */}
-        <div className="flex items-center gap-3 px-6 h-16 border-b border-neutral-100 dark:border-neutral-800">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white font-bold text-lg shadow-sm">
+        <div className="flex items-center gap-3 px-6 h-16 border-b border-neutral-100">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#0071e3] text-white font-bold text-lg shadow-sm">
             D
           </div>
           <div>
-            <h1 className="font-semibold text-neutral-800 dark:text-neutral-200 text-[15px] leading-tight">DevSamp CRM</h1>
+            <h1 className="font-semibold text-black text-[15px] leading-tight">DevSamp CRM</h1>
             <span className="text-[10px] text-neutral-400 font-medium tracking-wider uppercase">Sales Suite</span>
           </div>
         </div>
 
         {/* User Info Capsule */}
         {user && (
-          <div className="p-4 mx-4 my-3 rounded-xl bg-neutral-50 dark:bg-[#1c2635] border border-neutral-100/50 dark:border-neutral-800/50">
+          <div className="p-4 mx-4 my-3 rounded-xl bg-neutral-50 border border-neutral-200/50">
             <div className="flex items-center gap-3">
               <img 
                 src={user.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100'} 
                 alt="Avatar" 
-                className="w-9 h-9 rounded-full object-cover border border-neutral-200 dark:border-neutral-700"
+                className="w-9 h-9 rounded-full object-cover border border-neutral-200"
               />
               <div className="overflow-hidden">
-                <p className="font-medium text-xs text-neutral-800 dark:text-neutral-200 truncate">{user.name}</p>
-                <span className="inline-block px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 mt-0.5">
+                <p className="font-semibold text-xs text-black truncate">{user.name}</p>
+                <span className="inline-block px-1.5 py-0.5 rounded text-[9px] font-semibold bg-[#0071e3]/10 text-[#0071e3] mt-0.5">
                   {user.role}
                 </span>
               </div>
@@ -112,11 +112,11 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all ${
                   isActive 
-                    ? 'bg-blue-50/80 text-blue-600 dark:bg-blue-900/20 dark:text-sky-400' 
-                    : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-[#1a2330] hover:text-neutral-900 dark:hover:text-neutral-100'
+                    ? 'bg-[#0071e3] text-white shadow-xs font-semibold' 
+                    : 'text-neutral-700 hover:bg-neutral-50 hover:text-black'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-blue-600 dark:text-sky-400' : 'text-neutral-400 dark:text-neutral-500'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-neutral-400'}`} />
                 {item.name}
               </Link>
             );
@@ -124,10 +124,10 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         </nav>
 
         {/* Footer Actions */}
-        <div className="p-4 border-t border-neutral-100 dark:border-neutral-800">
+        <div className="p-4 border-t border-neutral-100">
           <button 
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/20 transition-all"
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-xs font-medium text-red-600 hover:bg-red-50 transition-all"
           >
             <LogOut className="w-4 h-4" />
             Sign Out
