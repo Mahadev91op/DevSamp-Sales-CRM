@@ -142,94 +142,162 @@ const MongoSubscription = mongoose.models.Subscription || mongoose.model('Subscr
 const MongoCompetitor = mongoose.models.Competitor || mongoose.model('Competitor', CompetitorSchema);
 const MongoActivity = mongoose.models.Activity || mongoose.model('Activity', ActivitySchema);
 
-// Mongoose Adapter to unify APIs
-class MongooseAdapter {
-  constructor(model) {
-    this.model = model;
+// Dynamic Unified Collection to switch between MongoDB and MockDB at runtime
+class UnifiedCollection {
+  constructor(mongoModel, mockCollection) {
+    this.mongoModel = mongoModel;
+    this.mockCollection = mockCollection;
+  }
+
+  isMongoActive() {
+    return mongoose.connection.readyState === 1;
   }
 
   async find(query = {}) {
-    // Convert id query if needed
-    const queryCopy = { ...query };
-    if (queryCopy.id) {
-      queryCopy._id = queryCopy.id;
-      delete queryCopy.id;
+    if (this.isMongoActive()) {
+      try {
+        const queryCopy = { ...query };
+        if (queryCopy.id) {
+          queryCopy._id = queryCopy.id;
+          delete queryCopy.id;
+        }
+        const docs = await this.mongoModel.find(queryCopy).lean();
+        return docs.map(doc => ({ id: doc._id.toString(), ...doc }));
+      } catch (err) {
+        console.warn('MongoDB query failed, falling back to mockDb:', err.message);
+        return this.mockCollection.find(query);
+      }
     }
-    const docs = await this.model.find(queryCopy).lean();
-    return docs.map(doc => ({ id: doc._id.toString(), ...doc }));
+    return this.mockCollection.find(query);
   }
 
   async findOne(query = {}) {
-    const queryCopy = { ...query };
-    if (queryCopy.id) {
-      queryCopy._id = queryCopy.id;
-      delete queryCopy.id;
+    if (this.isMongoActive()) {
+      try {
+        const queryCopy = { ...query };
+        if (queryCopy.id) {
+          queryCopy._id = queryCopy.id;
+          delete queryCopy.id;
+        }
+        const doc = await this.mongoModel.findOne(queryCopy).lean();
+        if (doc) return { id: doc._id.toString(), ...doc };
+        return null;
+      } catch (err) {
+        console.warn('MongoDB query failed, falling back to mockDb:', err.message);
+        return this.mockCollection.findOne(query);
+      }
     }
-    const doc = await this.model.findOne(queryCopy).lean();
-    if (!doc) return null;
-    return { id: doc._id.toString(), ...doc };
+    return this.mockCollection.findOne(query);
   }
 
   async findById(id) {
-    const doc = await this.model.findById(id).lean();
-    if (!doc) return null;
-    return { id: doc._id.toString(), ...doc };
+    if (this.isMongoActive()) {
+      try {
+        const doc = await this.mongoModel.findById(id).lean();
+        if (doc) return { id: doc._id.toString(), ...doc };
+        return null;
+      } catch (err) {
+        console.warn('MongoDB query failed, falling back to mockDb:', err.message);
+        return this.mockCollection.findById(id);
+      }
+    }
+    return this.mockCollection.findById(id);
   }
 
   async create(data) {
-    const doc = await this.model.create(data);
-    const obj = doc.toObject();
-    return { id: obj._id.toString(), ...obj };
+    if (this.isMongoActive()) {
+      try {
+        const doc = await this.mongoModel.create(data);
+        const obj = doc.toObject();
+        return { id: obj._id.toString(), ...obj };
+      } catch (err) {
+        console.warn('MongoDB create failed, falling back to mockDb:', err.message);
+        return this.mockCollection.create(data);
+      }
+    }
+    return this.mockCollection.create(data);
   }
 
   async findByIdAndUpdate(id, update, options = {}) {
-    const updatedFields = update.$set ? update.$set : update;
-    const doc = await this.model.findByIdAndUpdate(id, { $set: updatedFields }, { new: true, ...options }).lean();
-    if (!doc) return null;
-    return { id: doc._id.toString(), ...doc };
+    if (this.isMongoActive()) {
+      try {
+        const updatedFields = update.$set ? update.$set : update;
+        const doc = await this.mongoModel.findByIdAndUpdate(id, { $set: updatedFields }, { new: true, ...options }).lean();
+        if (doc) return { id: doc._id.toString(), ...doc };
+        return null;
+      } catch (err) {
+        console.warn('MongoDB update failed, falling back to mockDb:', err.message);
+        return this.mockCollection.findByIdAndUpdate(id, update, options);
+      }
+    }
+    return this.mockCollection.findByIdAndUpdate(id, update, options);
   }
 
   async findOneAndUpdate(query, update, options = {}) {
-    const queryCopy = { ...query };
-    if (queryCopy.id) {
-      queryCopy._id = queryCopy.id;
-      delete queryCopy.id;
+    if (this.isMongoActive()) {
+      try {
+        const queryCopy = { ...query };
+        if (queryCopy.id) {
+          queryCopy._id = queryCopy.id;
+          delete queryCopy.id;
+        }
+        const updatedFields = update.$set ? update.$set : update;
+        const doc = await this.mongoModel.findOneAndUpdate(queryCopy, { $set: updatedFields }, { new: true, ...options }).lean();
+        if (doc) return { id: doc._id.toString(), ...doc };
+        return null;
+      } catch (err) {
+        console.warn('MongoDB update failed, falling back to mockDb:', err.message);
+        return this.mockCollection.findOneAndUpdate(query, update, options);
+      }
     }
-    const updatedFields = update.$set ? update.$set : update;
-    const doc = await this.model.findOneAndUpdate(queryCopy, { $set: updatedFields }, { new: true, ...options }).lean();
-    if (!doc) return null;
-    return { id: doc._id.toString(), ...doc };
+    return this.mockCollection.findOneAndUpdate(query, update, options);
   }
 
   async deleteOne(query) {
-    const queryCopy = { ...query };
-    if (queryCopy.id) {
-      queryCopy._id = queryCopy.id;
-      delete queryCopy.id;
+    if (this.isMongoActive()) {
+      try {
+        const queryCopy = { ...query };
+        if (queryCopy.id) {
+          queryCopy._id = queryCopy.id;
+          delete queryCopy.id;
+        }
+        const res = await this.mongoModel.deleteOne(queryCopy);
+        return { deletedCount: res.deletedCount };
+      } catch (err) {
+        console.warn('MongoDB delete failed, falling back to mockDb:', err.message);
+        return this.mockCollection.deleteOne(query);
+      }
     }
-    const res = await this.model.deleteOne(queryCopy);
-    return { deletedCount: res.deletedCount };
+    return this.mockCollection.deleteOne(query);
   }
 
   async countDocuments(query = {}) {
-    const queryCopy = { ...query };
-    if (queryCopy.id) {
-      queryCopy._id = queryCopy.id;
-      delete queryCopy.id;
+    if (this.isMongoActive()) {
+      try {
+        const queryCopy = { ...query };
+        if (queryCopy.id) {
+          queryCopy._id = queryCopy.id;
+          delete queryCopy.id;
+        }
+        return await this.mongoModel.countDocuments(queryCopy);
+      } catch (err) {
+        console.warn('MongoDB count failed, falling back to mockDb:', err.message);
+        return this.mockCollection.countDocuments(query);
+      }
     }
-    return this.model.countDocuments(queryCopy);
+    return this.mockCollection.countDocuments(query);
   }
 }
 
 export const db = {
-  users: useMongo ? new MongooseAdapter(MongoUser) : mockDb.users,
-  shops: useMongo ? new MongooseAdapter(MongoShop) : mockDb.shops,
-  leads: useMongo ? new MongooseAdapter(MongoLead) : mockDb.leads,
-  visits: useMongo ? new MongooseAdapter(MongoVisit) : mockDb.visits,
-  tasks: useMongo ? new MongooseAdapter(MongoTask) : mockDb.tasks,
-  trials: useMongo ? new MongooseAdapter(MongoTrial) : mockDb.trials,
-  subscriptions: useMongo ? new MongooseAdapter(MongoSubscription) : mockDb.subscriptions,
-  competitors: useMongo ? new MongooseAdapter(MongoCompetitor) : mockDb.competitors,
-  activities: useMongo ? new MongooseAdapter(MongoActivity) : mockDb.activities,
+  users: new UnifiedCollection(MongoUser, mockDb.users),
+  shops: new UnifiedCollection(MongoShop, mockDb.shops),
+  leads: new UnifiedCollection(MongoLead, mockDb.leads),
+  visits: new UnifiedCollection(MongoVisit, mockDb.visits),
+  tasks: new UnifiedCollection(MongoTask, mockDb.tasks),
+  trials: new UnifiedCollection(MongoTrial, mockDb.trials),
+  subscriptions: new UnifiedCollection(MongoSubscription, mockDb.subscriptions),
+  competitors: new UnifiedCollection(MongoCompetitor, mockDb.competitors),
+  activities: new UnifiedCollection(MongoActivity, mockDb.activities),
 };
 export default db;
