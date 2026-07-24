@@ -1,59 +1,36 @@
 import { NextResponse } from 'next/server';
 
+// Next.js 16: Proxy files must export a function named 'proxy'
 export function proxy(request) {
   const token = request.cookies.get('token')?.value;
   const { pathname } = request.nextUrl;
 
-  // Paths that require authentication
-  const isProtectedRoute = pathname.startsWith('/dashboard') || 
-                          pathname.startsWith('/leads') || 
-                          pathname.startsWith('/shops') || 
-                          pathname.startsWith('/visits') || 
-                          pathname.startsWith('/tasks') || 
-                          pathname.startsWith('/pipeline') || 
-                          pathname.startsWith('/trials') || 
-                          pathname.startsWith('/subscriptions') || 
-                          pathname.startsWith('/reports') || 
-                          pathname.startsWith('/team') || 
-                          pathname.startsWith('/analytics') || 
-                          pathname.startsWith('/documents') || 
-                          pathname.startsWith('/settings');
-
-  // Login page path
   const isLoginRoute = pathname === '/login';
 
-  if (isProtectedRoute && !token) {
-    // Redirect to login if trying to access protected route without token
+  // If on login page with valid token → redirect to dashboard
+  if (isLoginRoute && token) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
+
+  // If NOT on login page and no token → redirect to login
+  if (!isLoginRoute && !token) {
     const loginUrl = new URL('/login', request.url);
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isLoginRoute && token) {
-    // Redirect to dashboard if logged in and trying to access login page
-    const dashboardUrl = new URL('/dashboard', request.url);
-    return NextResponse.redirect(dashboardUrl);
-  }
-
-  // Allow the request to proceed
+  // All other requests proceed normally
   return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    '/dashboard/:path*',
-    '/leads/:path*',
-    '/shops/:path*',
-    '/visits/:path*',
-    '/tasks/:path*',
-    '/pipeline/:path*',
-    '/trials/:path*',
-    '/subscriptions/:path*',
-    '/reports/:path*',
-    '/team/:path*',
-    '/analytics/:path*',
-    '/documents/:path*',
-    '/settings/:path*',
-    '/login',
+    /*
+     * Match all request paths EXCEPT:
+     * - _next/static (static files)
+     * - _next/image (image optimization)
+     * - favicon.ico, icon, manifest, sw.js (PWA files)
+     * - /api routes (handled server-side separately)
+     */
+    '/((?!_next/static|_next/image|favicon\\.ico|icon|manifest\\.json|sw\\.js|api/).*)',
   ],
 };
