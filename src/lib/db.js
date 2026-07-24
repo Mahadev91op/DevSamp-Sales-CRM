@@ -6,21 +6,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Check if we should use MongoDB or MockDB
 let useMongo = false;
 
-if (MONGODB_URI) {
-  try {
-    // Synchronously mark as true, then connect asynchronously
-    useMongo = true;
-    if (mongoose.connection.readyState === 0) {
-      mongoose.connect(MONGODB_URI).catch(err => {
-        console.warn('MongoDB connection failed, falling back to JSON mock database:', err.message);
-        useMongo = false;
-      });
-    }
-  } catch (e) {
-    console.warn('MongoDB connection failed, falling back to JSON mock database:', e.message);
-    useMongo = false;
-  }
-}
+// Connection setup is initialized below after models compile to enable seeding
 
 // Define Schemas
 const UserSchema = new mongoose.Schema({
@@ -141,6 +127,53 @@ const MongoTrial = mongoose.models.Trial || mongoose.model('Trial', TrialSchema)
 const MongoSubscription = mongoose.models.Subscription || mongoose.model('Subscription', SubscriptionSchema);
 const MongoCompetitor = mongoose.models.Competitor || mongoose.model('Competitor', CompetitorSchema);
 const MongoActivity = mongoose.models.Activity || mongoose.model('Activity', ActivitySchema);
+
+if (MONGODB_URI) {
+  try {
+    if (mongoose.connection.readyState === 0) {
+      mongoose.connect(MONGODB_URI).then(async () => {
+        console.log('MongoDB connected successfully!');
+        try {
+          const count = await MongoUser.countDocuments();
+          if (count === 0) {
+            console.log('Seeding default users to MongoDB...');
+            const defaultUsers = [
+              {
+                name: 'Super Admin',
+                email: 'admin@crm.com',
+                password: '$2a$10$wK1G0fD78kXpQvS/rW9hAed6PZJmXW3yvJbFk6.8R2qQo0eP2uWjS',
+                role: 'Super Admin',
+                avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+              },
+              {
+                name: 'Sales Manager',
+                email: 'manager@crm.com',
+                password: '$2a$10$q0iRk5N/0V/W521vJ671keoM8S29T1dI2yK85eD/K5yv3cZ0H2q92',
+                role: 'Sales Manager',
+                avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+              },
+              {
+                name: 'Sales Executive',
+                email: 'executive@crm.com',
+                password: '$2a$10$d1gXU0mF99H.aK81ke5ZYeK.Y8U489e.Z3hH0yY10rS.u3y/T2z3m',
+                role: 'Sales Executive',
+                avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
+              }
+            ];
+            await MongoUser.insertMany(defaultUsers);
+            console.log('Default users seeded successfully into MongoDB.');
+          }
+        } catch (e) {
+          console.warn('Auto-seeding MongoDB users failed:', e.message);
+        }
+      }).catch(err => {
+        console.warn('MongoDB connection failed, falling back to JSON mock database:', err.message);
+      });
+    }
+  } catch (e) {
+    console.warn('MongoDB connection failed, falling back to JSON mock database:', e.message);
+  }
+}
 
 // Dynamic Unified Collection to switch between MongoDB and MockDB at runtime
 class UnifiedCollection {
