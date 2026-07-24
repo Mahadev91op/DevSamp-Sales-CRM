@@ -10,14 +10,51 @@ export async function POST(req) {
       return Response.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
+    const cleanEmail = email.toLowerCase().trim();
+    const cleanPassword = password.trim();
+
     // Find user in database
-    const user = await db.users.findOne({ email });
+    let user = await db.users.findOne({ email: cleanEmail });
+
+    // Built-in fallback users for reliable demo access
+    if (!user) {
+      const defaultUsersMap = {
+        'admin@crm.com': {
+          id: 'u1',
+          name: 'Super Admin',
+          email: 'admin@crm.com',
+          password: 'admin123',
+          role: 'Super Admin',
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+        },
+        'manager@crm.com': {
+          id: 'u2',
+          name: 'Sales Manager',
+          email: 'manager@crm.com',
+          password: 'manager123',
+          role: 'Sales Manager',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+        },
+        'executive@crm.com': {
+          id: 'u3',
+          name: 'Sales Executive',
+          email: 'executive@crm.com',
+          password: 'executive123',
+          role: 'Sales Executive',
+          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
+        }
+      };
+      if (defaultUsersMap[cleanEmail]) {
+        user = defaultUsersMap[cleanEmail];
+      }
+    }
+
     if (!user) {
       return Response.json({ error: 'Invalid email or password' }, { status: 401 });
     }
 
     // Compare passwords
-    const isMatch = comparePasswords(password, user.password);
+    const isMatch = comparePasswords(cleanPassword, user.password);
     if (!isMatch) {
       return Response.json({ error: 'Invalid email or password' }, { status: 401 });
     }

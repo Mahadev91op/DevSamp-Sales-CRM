@@ -1,0 +1,248 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "Super Admin",
+      "email": "admin@crm.com",
+      "password": "$2a$10$wK1G0fD78kXpQvS/rW9hAed6PZJmXW3yvJbFk6.8R2qQo0eP2uWjS",
+      "role": "Super Admin",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "u2",
+      "name": "Sales Manager",
+      "email": "manager@crm.com",
+      "password": "$2a$10$q0iRk5N/0V/W521vJ671keoM8S29T1dI2yK85eD/K5yv3cZ0H2q92",
+      "role": "Sales Manager",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "u3",
+      "name": "Sales Executive",
+      "email": "executive@crm.com",
+      "password": "$2a$10$d1gXU0mF99H.aK81ke5ZYeK.Y8U489e.Z3hH0yY10rS.u3y/T2z3m",
+      "role": "Sales Executive",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80"
+    }
+  ],
+  "shops": [
+    {
+      "id": "s1",
+      "storeName": "Care Plus Pharmacy",
+      "ownerName": "Dr. Ramesh Sharma",
+      "mobile": "9876543210",
+      "whatsapp": "9876543210",
+      "email": "ramesh@careplus.com",
+      "address": "Shop No. 12, Metro Plaza, MG Road",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pin": "400001",
+      "gst": "27AAAAA1111A1Z1",
+      "drugLicense": "DL-12345-MUM",
+      "currentSoftware": "Marg ERP",
+      "employees": "3",
+      "businessSize": "Medium",
+      "monthlyRevenue": "450000",
+      "shopPhoto": "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=600&auto=format&fit=crop&q=60",
+      "gpsLocation": "19.0760, 72.8777"
+    },
+    {
+      "id": "s2",
+      "storeName": "Apex Health Center",
+      "ownerName": "Amit Verma",
+      "mobile": "9876543211",
+      "whatsapp": "9876543211",
+      "email": "amit@apexhealth.com",
+      "address": "15/A, Green Avenue, Sector 15",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pin": "201301",
+      "gst": "09BBBBB2222B2Z2",
+      "drugLicense": "DL-67890-UP",
+      "currentSoftware": "Vyapar",
+      "employees": "2",
+      "businessSize": "Small",
+      "monthlyRevenue": "220000",
+      "shopPhoto": "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=600&auto=format&fit=crop&q=60",
+      "gpsLocation": "28.5700, 77.3200"
+    },
+    {
+      "id": "s3",
+      "storeName": "Wellness Chemists",
+      "ownerName": "Mrs. Neha Gupta",
+      "mobile": "9876543212",
+      "whatsapp": "9876543212",
+      "email": "neha@wellnesschem.com",
+      "address": "Ground Floor, Galleria Mall, DLF Phase 4",
+      "city": "Gurugram",
+      "state": "Haryana",
+      "pin": "122002",
+      "gst": "06CCCCC3333C3Z3",
+      "drugLicense": "DL-11223-HR",
+      "currentSoftware": "GoFrugal",
+      "employees": "5",
+      "businessSize": "Large",
+      "monthlyRevenue": "850000",
+      "shopPhoto": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop&q=60",
+      "gpsLocation": "28.4595, 77.0266"
+    }
+  ],
+  "leads": [
+    {
+      "id": "l1",
+      "name": "Care Plus Pharmacy",
+      "shopId": "s1",
+      "email": "ramesh@careplus.com",
+      "phone": "9876543210",
+      "status": "Trial Started",
+      "priority": "High",
+      "assignedTo": "u3",
+      "notes": "Interested in switching from Marg ERP due to pricing and lack of mobile app.",
+      "qrCode": "DEV-LEAD-s1",
+      "businessCardPhoto": ""
+    },
+    {
+      "id": "l2",
+      "name": "Apex Health Center",
+      "shopId": "s2",
+      "email": "amit@apexhealth.com",
+      "phone": "9876543211",
+      "status": "Contacted",
+      "priority": "Medium",
+      "assignedTo": "u3",
+      "notes": "Wants a simple software for billing. Booked a demo.",
+      "qrCode": "DEV-LEAD-s2",
+      "businessCardPhoto": ""
+    },
+    {
+      "id": "l3",
+      "name": "Wellness Chemists",
+      "shopId": "s3",
+      "email": "neha@wellnesschem.com",
+      "phone": "9876543212",
+      "status": "Negotiation",
+      "priority": "High",
+      "assignedTo": "u3",
+      "notes": "Bigger store. Demanding a discount on yearly plan.",
+      "qrCode": "DEV-LEAD-s3",
+      "businessCardPhoto": ""
+    }
+  ],
+  "visits": [
+    {
+      "id": "v1",
+      "shopId": "s1",
+      "leadId": "l1",
+      "date": "2026-07-24",
+      "time": "11:00 AM",
+      "executiveId": "u3",
+      "purpose": "Software Demo",
+      "outcome": "Interested",
+      "notes": "Gave a complete demo of the billing and inventory modules. The client liked the UI and mobile dashboard.",
+      "photos": [
+        "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&q=40"
+      ],
+      "signature": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"50\"><path d=\"M 10 30 Q 30 10 50 30 T 90 30\" fill=\"none\" stroke=\"black\" stroke-width=\"2\"/></svg>",
+      "checkInTime": "2026-07-24T05:30:00.551Z",
+      "checkOutTime": "2026-07-24T06:15:00.551Z",
+      "duration": "45 mins",
+      "location": "19.0760, 72.8777"
+    },
+    {
+      "id": "v2",
+      "shopId": "s2",
+      "leadId": "l2",
+      "date": "2026-07-23",
+      "time": "03:30 PM",
+      "executiveId": "u3",
+      "purpose": "Cold Visit",
+      "outcome": "Scheduled Demo",
+      "notes": "Store owner was busy. Scheduled a follow-up demo for tomorrow.",
+      "photos": [],
+      "signature": "",
+      "checkInTime": "2026-07-23T12:16:35.551Z",
+      "checkOutTime": "2026-07-23T12:36:35.551Z",
+      "duration": "20 mins",
+      "location": "28.5700, 77.3200"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Call Mrs. Neha for Renewal",
+      "description": "Discuss discount option and final quote.",
+      "priority": "High",
+      "deadline": "2026-07-25",
+      "assignedTo": "u3",
+      "completed": false,
+      "isRecurring": false
+    },
+    {
+      "id": "t2",
+      "title": "Submit Daily Visit Report",
+      "description": "Update CRM logs and upload check-out photos.",
+      "priority": "Medium",
+      "deadline": "2026-07-24",
+      "assignedTo": "u3",
+      "completed": false,
+      "isRecurring": true
+    }
+  ],
+  "trials": [
+    {
+      "id": "tr1",
+      "leadId": "l1",
+      "shopId": "s1",
+      "startDate": "2026-07-19",
+      "endDate": "2026-08-02",
+      "daysRemaining": 9,
+      "status": "Active",
+      "feedbackVideo": ""
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": "sub1",
+      "shopId": "s3",
+      "status": "Active",
+      "plan": "Yearly Professional",
+      "amount": "12000",
+      "renewalDate": "2027-03-31",
+      "invoices": [
+        {
+          "id": "inv-1001",
+          "date": "2026-03-31",
+          "amount": "12000",
+          "status": "Paid"
+        }
+      ]
+    }
+  ],
+  "competitors": [
+    {
+      "id": "c1",
+      "shopId": "s1",
+      "softwareName": "Marg ERP",
+      "monthlyCost": "800",
+      "renewalDate": "2026-10-15",
+      "likeFactors": "Rich inventory features, works offline, very popular among distributors.",
+      "weaknesses": "Difficult user interface, no cloud sync, expensive mobile reporting add-on."
+    }
+  ],
+  "activities": [
+    {
+      "id": "act1",
+      "userId": "u3",
+      "type": "lead_update",
+      "description": "Updated Care Plus Pharmacy status to Trial Started.",
+      "timestamp": "2026-07-24T12:16:35.551Z"
+    },
+    {
+      "id": "act2",
+      "userId": "u3",
+      "type": "visit_create",
+      "description": "Logged visit to Care Plus Pharmacy.",
+      "timestamp": "2026-07-24T11:16:35.551Z"
+    }
+  ]
+}

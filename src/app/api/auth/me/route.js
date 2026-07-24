@@ -16,10 +16,10 @@ export async function GET() {
       return Response.json({ user: null });
     }
 
-    // Optionally fetch the latest data from db
+    // Fetch the latest data from db or fallback to token payload
     const user = await db.users.findOne({ email: payload.email });
     if (!user) {
-      return Response.json({ user: null });
+      return Response.json({ user: payload });
     }
 
     const { password: _, ...userWithoutPassword } = user;
