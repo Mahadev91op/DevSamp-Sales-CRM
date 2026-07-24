@@ -48,12 +48,23 @@ export default function ClientLayout({ children }) {
   // 3. PWA Service worker registration
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(
-          (registration) => console.log('PWA Service Worker registered:', registration.scope),
-          (err) => console.warn('PWA Service Worker registration failed:', err)
-        );
-      });
+      if (process.env.NODE_ENV === 'production') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(
+            (registration) => console.log('PWA Service Worker registered:', registration.scope),
+            (err) => console.warn('PWA Service Worker registration failed:', err)
+          );
+        });
+      } else {
+        // Unregister existing service workers in development to prevent hot reloading (HMR) loops
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (let registration of registrations) {
+            registration.unregister().then((success) => {
+              if (success) console.log('Dev Service Worker unregistered successfully');
+            });
+          }
+        });
+      }
     }
   }, []);
 

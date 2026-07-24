@@ -29,6 +29,11 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Ignore Next.js HMR compiler hot reloading calls
+  if (event.request.url.includes('_next') || event.request.url.includes('webpack') || event.request.url.includes('hot-update')) {
+    return;
+  }
+
   // Only intercept GET requests
   if (event.request.method !== 'GET') return;
 
