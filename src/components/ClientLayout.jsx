@@ -94,42 +94,36 @@ export default function ClientLayout({ children }) {
 
   const isLoginRoute = pathname === '/login';
 
-  // Beautiful Apple Loading State
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-50 dark:bg-[#0b0f17]">
-        <div className="w-8 h-8 rounded-full border-2 border-blue-500/20 border-t-blue-500 animate-spin" />
-        <p className="mt-4 text-xs font-medium text-neutral-400 dark:text-neutral-500 tracking-wide">
-          Syncing Sales Dashboard...
-        </p>
-      </div>
-    );
-  }
-
-  // Login view: Plain layout
-  if (isLoginRoute) {
-    return (
-      <>
-        <main>{children}</main>
-        <Toaster position="top-right" theme={theme} richColors />
-      </>
-    );
-  }
-
-  // Dashboard view: Full sidebar & header structure
   return (
-    <div className="flex min-h-screen bg-neutral-50 dark:bg-[#0b0f17]">
-      <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-      
-      <div className="flex-1 flex flex-col min-w-0">
-        <Header onMenuClick={() => setSidebarOpen(true)} />
-        <main className="flex-grow p-6 md:p-8 animate-fade-in max-w-7xl w-full mx-auto">
-          {children}
-        </main>
-      </div>
+    <>
+      {isLoginRoute ? (
+        <main>{children}</main>
+      ) : (
+        <div className="flex min-h-screen bg-neutral-50">
+          <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+          
+          <div className="flex-1 flex flex-col min-w-0">
+            <Header onMenuClick={() => setSidebarOpen(true)} />
+            <main className="flex-grow p-6 md:p-8 animate-fade-in max-w-7xl w-full mx-auto">
+              {children}
+            </main>
+          </div>
 
-      <CommandPalette />
+          <CommandPalette />
+        </div>
+      )}
+
+      {/* Loader overlay to hide view while loading session data without skipping child hook hydration */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white">
+          <div className="w-8 h-8 rounded-full border-2 border-blue-500/20 border-t-blue-500 animate-spin" />
+          <p className="mt-4 text-xs font-medium text-neutral-400 tracking-wide">
+            Syncing Sales Dashboard...
+          </p>
+        </div>
+      )}
+
       <Toaster position="top-right" theme={theme} richColors />
-    </div>
+    </>
   );
 }
