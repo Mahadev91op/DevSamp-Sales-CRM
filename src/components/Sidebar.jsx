@@ -40,19 +40,19 @@ export default function Sidebar({ isOpen, setIsOpen }) {
   };
 
   const menuItems = [
-    { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
-    { name: 'Leads', icon: Users, path: '/leads', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
-    { name: 'Medical Shops', icon: Store, path: '/shops', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
-    { name: 'Visits Log', icon: MapPin, path: '/visits', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
-    { name: 'Sales Pipeline', icon: GitBranch, path: '/pipeline', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
-    { name: 'Tasks & Calendar', icon: CheckSquare, path: '/tasks', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
-    { name: 'Trials & Subs', icon: Layers, path: '/trials', roles: ['Super Admin', 'Sales Manager'] },
-    { name: 'Reports & Analytics', icon: TrendingUp, path: '/reports', roles: ['Super Admin', 'Sales Manager'] },
-    { name: 'Documents', icon: FileText, path: '/documents', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
-    { name: 'Settings', icon: Settings, path: '/settings', roles: ['Super Admin', 'Sales Manager', 'Sales Executive'] },
+    { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+    { name: 'Leads', icon: Users, path: '/leads' },
+    { name: 'Medical Shops', icon: Store, path: '/shops' },
+    { name: 'Visits Log', icon: MapPin, path: '/visits' },
+    { name: 'Sales Pipeline', icon: GitBranch, path: '/pipeline' },
+    { name: 'Tasks & Calendar', icon: CheckSquare, path: '/tasks' },
+    { name: 'Trials & Subs', icon: Layers, path: '/trials' },
+    { name: 'Reports & Analytics', icon: TrendingUp, path: '/reports' },
+    { name: 'Documents', icon: FileText, path: '/documents' },
+    { name: 'Settings', icon: Settings, path: '/settings' },
   ];
 
-  const filteredMenu = menuItems.filter(item => user && item.roles.includes(user.role));
+  const filteredMenu = menuItems;
 
   return (
     <>
@@ -93,7 +93,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
               <div className="overflow-hidden">
                 <p className="font-semibold text-xs text-black truncate">{user.name}</p>
                 <span className="inline-block px-1.5 py-0.5 rounded text-[9px] font-semibold bg-[#0071e3]/10 text-[#0071e3] mt-0.5">
-                  {user.role}
+                  Full Access
                 </span>
               </div>
             </div>

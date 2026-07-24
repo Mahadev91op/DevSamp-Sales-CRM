@@ -98,32 +98,14 @@ export default function Login() {
 
         {/* Quick Credentials Block */}
         <div className="px-8 pb-4">
-          <p className="text-[10px] font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">
-            Quick fill credentials
-          </p>
-          <div className="grid grid-cols-3 gap-2">
-            <button 
-              type="button"
-              onClick={() => handleQuickFill('admin@crm.com', 'admin123')}
-              className="px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-[10px] font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-[#1a2330] transition-all"
-            >
-              Super Admin
-            </button>
-            <button 
-              type="button"
-              onClick={() => handleQuickFill('manager@crm.com', 'manager123')}
-              className="px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-[10px] font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-[#1a2330] transition-all"
-            >
-              Sales Manager
-            </button>
-            <button 
-              type="button"
-              onClick={() => handleQuickFill('executive@crm.com', 'executive123')}
-              className="px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-[10px] font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-[#1a2330] transition-all"
-            >
-              Executive
-            </button>
-          </div>
+          <button 
+            type="button"
+            onClick={() => handleQuickFill('admin@crm.com', 'admin123')}
+            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl border border-[#0071e3]/20 bg-[#0071e3]/5 hover:bg-[#0071e3]/10 text-xs font-semibold text-[#0071e3] transition-all"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#0071e3]" />
+            <span>One-Click Demo Fill (Full Access)</span>
+          </button>
         </div>
 
         {/* Login Form */}
