@@ -11,10 +11,7 @@ if (MONGODB_URI) {
     // Synchronously mark as true, then connect asynchronously
     useMongo = true;
     if (mongoose.connection.readyState === 0) {
-      mongoose.connect(MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }).catch(err => {
+      mongoose.connect(MONGODB_URI).catch(err => {
         console.warn('MongoDB connection failed, falling back to JSON mock database:', err.message);
         useMongo = false;
       });

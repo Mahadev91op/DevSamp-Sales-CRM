@@ -42,9 +42,20 @@ export default function ClientLayout({ children }) {
 
   // 2. Initialize Theme
   useEffect(() => {
-    const savedTheme = localStorage.getItem('crm-theme') || 'light';
-    setTheme(savedTheme);
+    setTheme('light'); // Force light theme always
   }, [setTheme]);
+
+  // 3. PWA Service worker registration
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(
+          (registration) => console.log('PWA Service Worker registered:', registration.scope),
+          (err) => console.warn('PWA Service Worker registration failed:', err)
+        );
+      });
+    }
+  }, []);
 
   // 3. Helper to fetch CRM data for global search and dashboards
   const fetchCRMData = async () => {

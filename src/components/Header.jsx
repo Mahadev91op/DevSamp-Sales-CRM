@@ -85,14 +85,7 @@ export default function Header({ onMenuClick }) {
           <Search className="w-4 h-4" />
         </button>
 
-        {/* Theme Toggle */}
-        <button 
-          onClick={toggleTheme}
-          className="p-1.5 text-neutral-500 hover:bg-neutral-100 dark:hover:bg-[#131b26] rounded-full transition-all"
-          title="Toggle Theme"
-        >
-          {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4 text-amber-400" />}
-        </button>
+
 
         {/* Notifications Icon (Mocked) */}
         <div className="relative">

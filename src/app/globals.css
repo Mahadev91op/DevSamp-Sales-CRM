@@ -1,30 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9fafb;
-  --foreground: #111827;
+  --background: #ffffff;
+  --foreground: #000000;
   --card: #ffffff;
-  --card-foreground: #111827;
-  --border: #e5e7eb;
+  --card-foreground: #000000;
+  --border: #e2e8f0;
   --primary: #0071e3;
   --primary-foreground: #ffffff;
-  --muted: #6b7280;
-  --muted-foreground: #9ca3af;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
 }
 
+/* Enforce same light variables if .dark class is added */
 .dark {
-  --background: #0b0f17;
-  --foreground: #f3f4f6;
-  --card: #131b26;
-  --card-foreground: #f3f4f6;
-  --border: #1f2937;
-  --primary: #38bdf8;
-  --primary-foreground: #0b0f17;
-  --muted: #9ca3af;
-  --muted-foreground: #6b7280;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --border: #e2e8f0;
+  --primary: #0071e3;
+  --primary-foreground: #ffffff;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
 }
 
 body {
@@ -32,28 +33,12 @@ body {
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Glassmorphism utility */
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.dark .glass {
-  background: rgba(19, 27, 38, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Custom transitions and scrollbars */
+/* Custom premium scrollbar matching the theme */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -66,39 +51,119 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted);
+  background: var(--muted-foreground);
 }
 
 /* Input styles focus ring */
 input:focus, select:focus, textarea:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.15);
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.15) !important;
 }
 
-.dark input:focus, .dark select:focus, .dark textarea:focus {
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
-}
-
-/* Animation utilities */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
+/* Card hover animation */
 .card-hover {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.04);
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.05);
 }
 
-.dark .card-hover:hover {
-  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.2);
+/* ==========================================
+   MOBILE-FIRST COMPACT SCALES (NATIVE APP)
+   ========================================== */
+@media (max-width: 640px) {
+  body {
+    font-size: 11px !important;
+    background-color: #f8fafc !important; /* Soft card contrast on mobile background */
+  }
+
+  /* Compress paddings and margins */
+  .p-8 { padding: 14px !important; }
+  .p-6 { padding: 12px !important; }
+  .p-5 { padding: 10px !important; }
+  .p-4 { padding: 8px !important; }
+  .px-6 { padding-left: 12px !important; padding-right: 12px !important; }
+  
+  .gap-6 { gap: 10px !important; }
+  .gap-4 { gap: 8px !important; }
+  
+  .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 14px !important; }
+  .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 10px !important; }
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 8px !important; }
+
+  /* Compact roundings */
+  .rounded-3xl { border-radius: 14px !important; }
+  .rounded-2xl { border-radius: 10px !important; }
+  .rounded-xl { border-radius: 8px !important; }
+
+  /* Scale down typography */
+  h1 {
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+  }
+  h2 {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+  }
+  h3 {
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+  }
+  p {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Make forms and button components compact and tight */
+  input, select, textarea {
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+    border-radius: 8px !important;
+    height: auto !important;
+  }
+  button, .btn {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+    border-radius: 8px !important;
+    height: auto !important;
+  }
+
+  /* Hide large banner descriptions to save vertical screen space */
+  .text-xs.text-neutral-500 {
+    display: none !important;
+  }
+
+  /* Custom grid columns to preserve horizontal space */
+  .grid-cols-4, .grid-cols-3, .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  
+  /* Double column stats card grid inside dashboard */
+  .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  /* Hide unnecessary elements on mobile headers */
+  header {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    height: 50px !important;
+    border-bottom: 1px solid var(--border) !important;
+    background: #ffffff !important;
+  }
+  
+  /* Navigation sidebar floating offset */
+  aside {
+    width: 240px !important;
+  }
+
+  /* Compact dashboard charts height */
+  .h-64, .h-60, .h-48 {
+    height: 180px !important;
+  }
 }

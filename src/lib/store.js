@@ -5,21 +5,8 @@ export const useStore = create((set) => ({
   setUser: (user) => set({ user }),
   
   theme: 'light',
-  toggleTheme: () => set((state) => {
-    const nextTheme = state.theme === 'light' ? 'dark' : 'light';
-    if (typeof window !== 'undefined') {
-      document.documentElement.classList.toggle('dark', nextTheme === 'dark');
-      localStorage.setItem('crm-theme', nextTheme);
-    }
-    return { theme: nextTheme };
-  }),
-  setTheme: (theme) => {
-    if (typeof window !== 'undefined') {
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-      localStorage.setItem('crm-theme', theme);
-    }
-    set({ theme });
-  },
+  toggleTheme: () => {},
+  setTheme: (theme) => set({ theme: 'light' }),
 
   commandPaletteOpen: false,
   setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open }),
