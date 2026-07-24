@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useStore } from '@/lib/store';
-import { Key, Mail, ShieldAlert, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Key, Mail, Sparkles, CheckCircle2, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Login() {
@@ -12,14 +12,13 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  // Forgot password flow states
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [forgotStep, setForgotStep] = useState(1); // 1: Email, 2: OTP, 3: Success
+  const [forgotStep, setForgotStep] = useState(1);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,7 +26,6 @@ export default function Login() {
       toast.error('Please enter both email and password');
       return;
     }
-
     setLoading(true);
     try {
       const res = await fetch('/api/auth/login', {
@@ -36,7 +34,6 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-
       if (res.ok && data.success) {
         setUser(data.user);
         toast.success(`Welcome back, ${data.user.name}!`);
@@ -51,226 +48,178 @@ export default function Login() {
     }
   };
 
-  const handleQuickFill = (roleEmail, rolePassword) => {
-    setEmail(roleEmail);
-    setPassword(rolePassword);
+  const handleQuickFill = () => {
+    setEmail('admin@crm.com');
+    setPassword('admin123');
+    toast.success('Demo credentials filled!');
   };
 
   const handleForgotSubmit = (e) => {
     e.preventDefault();
     if (forgotStep === 1) {
-      if (!forgotEmail) {
-        toast.error('Please enter your email');
-        return;
-      }
-      toast.success('OTP sent to ' + forgotEmail + ' (Mock OTP: 1234)');
+      if (!forgotEmail) { toast.error('Please enter your email'); return; }
+      toast.success('OTP sent! (Test OTP: 1234)');
       setForgotStep(2);
     } else if (forgotStep === 2) {
-      if (otp !== '1234') {
-        toast.error('Invalid OTP. Use "1234" for mock testing');
-        return;
-      }
-      if (!newPassword || newPassword.length < 6) {
-        toast.error('Password must be at least 6 characters');
-        return;
-      }
+      if (otp !== '1234') { toast.error('Invalid OTP. Use 1234'); return; }
+      if (!newPassword || newPassword.length < 6) { toast.error('Password must be 6+ characters'); return; }
       toast.success('Password reset successfully!');
       setForgotStep(3);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#f3f4f6] dark:bg-[#0b0f17] px-4">
-      <div className="w-full max-w-md overflow-hidden bg-white dark:bg-[#131b26] rounded-3xl shadow-xl border border-neutral-100 dark:border-neutral-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center px-4 py-10">
+      
+      {/* Background floating blobs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-float" />
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-sky-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-float" style={{ animationDelay: '1.5s' }} />
+
+      <div className="relative z-10 w-full max-w-sm">
         
-        {/* Header Block */}
-        <div className="p-8 pb-4 text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 dark:bg-sky-500 text-white font-bold text-2xl shadow-md mb-4 animate-bounce">
+        {/* Logo & Branding */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#0071e3] text-white font-extrabold text-3xl shadow-lg shadow-blue-200 mb-4 animate-float">
             D
           </div>
-          <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-50 tracking-tight">
-            Sign in to DevSamp
-          </h2>
-          <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1">
-            Manage Leads. Close More Deals. Grow Faster.
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">DevSamp CRM</h1>
+          <p className="text-sm text-gray-500 mt-1">Manage Leads. Close Deals. Grow Faster.</p>
         </div>
 
-        {/* Quick Credentials Block */}
-        <div className="px-8 pb-4">
-          <button 
-            type="button"
-            onClick={() => handleQuickFill('admin@crm.com', 'admin123')}
-            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl border border-[#0071e3]/20 bg-[#0071e3]/5 hover:bg-[#0071e3]/10 text-xs font-semibold text-[#0071e3] transition-all"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#0071e3]" />
-            <span>One-Click Demo Fill (Full Access)</span>
-          </button>
-        </div>
-
-        {/* Login Form */}
-        <form onSubmit={handleLogin} className="px-8 pb-8 space-y-4">
-          <div className="space-y-1">
-            <label className="text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-              Email Address
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-3 w-4 h-4 text-neutral-400" />
-              <input 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com" 
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#1c2635] text-xs text-neutral-800 dark:text-neutral-100 focus:bg-white dark:focus:bg-[#131b26] transition-all"
-              />
-            </div>
+        {/* Login Card */}
+        <div className="bg-white rounded-3xl shadow-xl shadow-blue-100/50 border border-blue-100/80 overflow-hidden">
+          
+          {/* Card Header */}
+          <div className="px-8 pt-8 pb-4">
+            <h2 className="text-lg font-bold text-gray-900">Welcome back</h2>
+            <p className="text-xs text-gray-500 mt-0.5">Sign in to your CRM account</p>
           </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center justify-between">
-              <label className="text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-                Password
+          {/* Demo Access Button */}
+          <div className="px-8 pb-4">
+            <button
+              type="button"
+              onClick={handleQuickFill}
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-dashed border-blue-200 bg-blue-50/60 hover:bg-blue-100/60 text-sm font-semibold text-[#0071e3] transition-all duration-200 hover:border-blue-300"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>One-Click Demo Access</span>
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3 px-8 pb-4">
+            <div className="flex-1 h-px bg-gray-100" />
+            <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Or sign in manually</span>
+            <div className="flex-1 h-px bg-gray-100" />
+          </div>
+
+          {/* Login Form */}
+          <form onSubmit={handleLogin} className="px-8 pb-8 space-y-4">
+            {/* Email */}
+            <div>
+              <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+                Email Address
               </label>
-              <button 
-                type="button"
-                onClick={() => {
-                  setForgotStep(1);
-                  setForgotEmail('');
-                  setOtp('');
-                  setNewPassword('');
-                  setShowForgotModal(true);
-                }}
-                className="text-[10px] text-blue-600 dark:text-sky-400 hover:underline font-semibold"
-              >
-                Forgot?
-              </button>
+              <div className="relative">
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@company.com"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 placeholder-gray-400 transition-all focus:bg-white focus:border-[#0071e3] focus:ring-3 focus:ring-blue-100 outline-none"
+                />
+              </div>
             </div>
-            <div className="relative">
-              <Key className="absolute left-3 top-3 w-4 h-4 text-neutral-400" />
-              <input 
-                type="password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••" 
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#1c2635] text-xs text-neutral-800 dark:text-neutral-100 focus:bg-white dark:focus:bg-[#131b26] transition-all"
-              />
+
+            {/* Password */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">Password</label>
+                <button
+                  type="button"
+                  onClick={() => { setForgotStep(1); setForgotEmail(''); setOtp(''); setNewPassword(''); setShowForgotModal(true); }}
+                  className="text-[11px] font-semibold text-[#0071e3] hover:text-blue-700 transition-colors"
+                >
+                  Forgot password?
+                </button>
+              </div>
+              <div className="relative">
+                <Key className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 placeholder-gray-400 transition-all focus:bg-white focus:border-[#0071e3] focus:ring-3 focus:ring-blue-100 outline-none"
+                />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div className="flex items-center">
-            <input 
-              id="remember" 
-              type="checkbox" 
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-              className="w-4 h-4 rounded text-blue-600 bg-neutral-50 border-neutral-300 dark:bg-[#1c2635] dark:border-neutral-800"
-            />
-            <label htmlFor="remember" className="ml-2 text-[10px] text-neutral-500 dark:text-neutral-400 font-medium">
-              Remember me on this device
-            </label>
-          </div>
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#0071e3] hover:bg-blue-600 active:bg-blue-700 text-white py-3 rounded-xl text-sm font-bold shadow-md shadow-blue-200 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 mt-2"
+            >
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Signing in...
+                </>
+              ) : 'Sign In →'}
+            </button>
+          </form>
+        </div>
 
-          <button 
-            type="submit" 
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white dark:text-[#0b0f17] py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-          >
-            {loading ? 'Authenticating...' : 'Sign In'}
-          </button>
-        </form>
+        <p className="text-center text-[11px] text-gray-400 mt-6">
+          © 2026 DevSamp Sales CRM · All rights reserved
+        </p>
       </div>
 
-      {/* Forgot Password Flow Modal */}
+      {/* Forgot Password Modal */}
       {showForgotModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-sm overflow-hidden bg-white dark:bg-[#131b26] border border-neutral-100 dark:border-neutral-800 rounded-2xl p-6 shadow-2xl space-y-4">
-            <h3 className="text-xs font-bold text-neutral-800 dark:text-neutral-50">
-              {forgotStep === 1 && 'Reset Password'}
-              {forgotStep === 2 && 'Verify Code'}
-              {forgotStep === 3 && 'Success!'}
-            </h3>
-            
-            <form onSubmit={handleForgotSubmit} className="space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/20 backdrop-blur-sm">
+          <div className="w-full max-w-sm bg-white rounded-2xl p-6 shadow-2xl border border-gray-100 space-y-4 animate-slide-up">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-gray-900">
+                {forgotStep === 1 && 'Reset Password'}
+                {forgotStep === 2 && 'Enter OTP'}
+                {forgotStep === 3 && 'Success!'}
+              </h3>
+              <button onClick={() => setShowForgotModal(false)} className="text-gray-400 hover:text-gray-600 text-lg leading-none">&times;</button>
+            </div>
+
+            <form onSubmit={handleForgotSubmit} className="space-y-3">
               {forgotStep === 1 && (
                 <>
-                  <p className="text-[10px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                    Enter your email address and we'll send you an OTP to reset your credentials.
-                  </p>
-                  <input 
-                    type="email"
-                    value={forgotEmail}
-                    onChange={(e) => setForgotEmail(e.target.value)}
-                    placeholder="name@company.com"
-                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs dark:bg-[#1c2635]"
-                  />
+                  <p className="text-xs text-gray-500">Enter your email to receive an OTP reset code.</p>
+                  <input type="email" value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)} placeholder="your@email.com" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:border-[#0071e3] outline-none transition-all" />
                   <div className="flex gap-2 justify-end">
-                    <button 
-                      type="button" 
-                      onClick={() => setShowForgotModal(false)}
-                      className="px-3 py-1.5 rounded-lg border border-neutral-200 text-[10px] dark:border-neutral-800"
-                    >
-                      Cancel
-                    </button>
-                    <button 
-                      type="submit"
-                      className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-[10px]"
-                    >
-                      Send OTP
-                    </button>
+                    <button type="button" onClick={() => setShowForgotModal(false)} className="px-4 py-2 rounded-lg border border-gray-200 text-xs text-gray-600 hover:bg-gray-50 transition-all">Cancel</button>
+                    <button type="submit" className="px-4 py-2 bg-[#0071e3] text-white rounded-lg text-xs font-semibold hover:bg-blue-600 transition-all">Send OTP</button>
                   </div>
                 </>
               )}
-
               {forgotStep === 2 && (
                 <>
-                  <p className="text-[10px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                    We sent a code to your inbox. Enter <strong>1234</strong> to verify and enter a new password.
-                  </p>
-                  <input 
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    placeholder="Enter OTP (e.g. 1234)"
-                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs dark:bg-[#1c2635]"
-                  />
-                  <input 
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="New password (min 6 chars)"
-                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs dark:bg-[#1c2635]"
-                  />
+                  <p className="text-xs text-gray-500">Enter code <strong className="text-gray-800">1234</strong> (demo) and your new password.</p>
+                  <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="Enter OTP" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:border-[#0071e3] outline-none transition-all" />
+                  <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="New Password (6+ chars)" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:border-[#0071e3] outline-none transition-all" />
                   <div className="flex gap-2 justify-end">
-                    <button 
-                      type="button" 
-                      onClick={() => setForgotStep(1)}
-                      className="px-3 py-1.5 rounded-lg border border-neutral-200 text-[10px] dark:border-neutral-800"
-                    >
-                      Back
-                    </button>
-                    <button 
-                      type="submit"
-                      className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-[10px]"
-                    >
-                      Reset Password
-                    </button>
+                    <button type="button" onClick={() => setForgotStep(1)} className="px-4 py-2 rounded-lg border border-gray-200 text-xs text-gray-600 hover:bg-gray-50 transition-all">Back</button>
+                    <button type="submit" className="px-4 py-2 bg-[#0071e3] text-white rounded-lg text-xs font-semibold hover:bg-blue-600 transition-all">Reset</button>
                   </div>
                 </>
               )}
-
               {forgotStep === 3 && (
                 <div className="text-center py-4 space-y-3">
-                  <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto" />
-                  <p className="text-[10px] text-neutral-500 dark:text-neutral-400">
-                    Your password has been successfully reset. You can now log in.
-                  </p>
-                  <button 
-                    type="button" 
-                    onClick={() => setShowForgotModal(false)}
-                    className="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-[10px]"
-                  >
-                    Close
-                  </button>
+                  <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
+                  <p className="text-xs text-gray-500">Password reset successfully! You can now sign in with your new password.</p>
+                  <button type="button" onClick={() => setShowForgotModal(false)} className="px-6 py-2 bg-[#0071e3] text-white rounded-lg text-xs font-semibold hover:bg-blue-600 transition-all">Done</button>
                 </div>
               )}
             </form>

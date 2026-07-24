@@ -117,12 +117,12 @@ export default function MedicalShops() {
       {/* Title section */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-neutral-800 dark:text-neutral-50 tracking-tight">Registered Medical Shops</h1>
-          <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1">Manage physical pharmacy profiles and ERP records</p>
+          <h1 className="text-xl font-bold text-neutral-800 tracking-tight">Registered Medical Shops</h1>
+          <p className="text-xs text-neutral-400 mt-1">Manage physical pharmacy profiles and ERP records</p>
         </div>
         <button 
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white dark:text-[#0b0f17] px-4 py-2 rounded-xl text-xs font-semibold shadow-xs cursor-pointer select-none transition-all"
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-xs cursor-pointer select-none transition-all"
         >
           <Plus className="w-4 h-4" />
           Add Medical Shop
@@ -130,21 +130,21 @@ export default function MedicalShops() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col lg:flex-row gap-4 bg-white dark:bg-[#131b26] p-4 border border-neutral-100 dark:border-neutral-800 rounded-2xl shadow-xs">
+      <div className="flex flex-col lg:flex-row gap-4 bg-white p-4 border border-neutral-100 rounded-2xl shadow-xs">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-3 w-4 h-4 text-neutral-400" />
           <input 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by store name, owner, city..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#1a2330] text-xs"
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-neutral-200 bg-neutral-50/50 text-xs"
           />
         </div>
         <div className="grid grid-cols-3 gap-3 min-w-[320px]">
           <select 
             value={filterCity}
             onChange={(e) => setFilterCity(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50/50 dark:bg-[#1a2330]"
+            className="px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50/50"
           >
             <option value="All">All Cities</option>
             {cities.filter(c => c !== 'All').map(c => (
@@ -154,7 +154,7 @@ export default function MedicalShops() {
           <select 
             value={filterSize}
             onChange={(e) => setFilterSize(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50/50 dark:bg-[#1a2330]"
+            className="px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50/50"
           >
             <option value="All">All Sizes</option>
             <option value="Small">Small (1-2 employees)</option>
@@ -164,7 +164,7 @@ export default function MedicalShops() {
           <select 
             value={filterSoftware}
             onChange={(e) => setFilterSoftware(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50/50 dark:bg-[#1a2330]"
+            className="px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50/50"
           >
             {softs.map(s => (
               <option key={s} value={s}>{s === 'All' ? 'All Software' : s}</option>
@@ -177,14 +177,14 @@ export default function MedicalShops() {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-44 bg-neutral-200 dark:bg-neutral-800 rounded-2xl animate-pulse" />
+            <div key={i} className="h-44 bg-neutral-200 rounded-2xl animate-pulse" />
           ))}
         </div>
       ) : filteredShops.length === 0 ? (
-        <div className="text-center py-20 bg-white dark:bg-[#131b26] border border-neutral-100 dark:border-neutral-800 rounded-3xl">
+        <div className="text-center py-20 bg-white border border-neutral-100 rounded-3xl">
           <Store className="w-12 h-12 text-neutral-300 mx-auto" />
-          <h3 className="mt-4 text-xs font-semibold text-neutral-700 dark:text-neutral-300">No medical shops found</h3>
-          <p className="text-[10px] text-neutral-400 dark:text-neutral-500 mt-1">Try adjusting your filters or search terms.</p>
+          <h3 className="mt-4 text-xs font-semibold text-neutral-700">No medical shops found</h3>
+          <p className="text-[10px] text-neutral-400 mt-1">Try adjusting your filters or search terms.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -192,16 +192,16 @@ export default function MedicalShops() {
             <div 
               key={shop.id}
               onClick={() => setSelectedShop(shop)}
-              className="bg-white dark:bg-[#131b26] border border-neutral-100 dark:border-neutral-800 p-5 rounded-2xl shadow-xs card-hover cursor-pointer"
+              className="bg-white border border-neutral-100 p-5 rounded-2xl shadow-xs card-hover cursor-pointer"
             >
               <div className="flex gap-4">
                 <img 
                   src={shop.shopPhoto || 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=100'} 
                   alt="Shop" 
-                  className="w-14 h-14 rounded-xl object-cover border border-neutral-100 dark:border-neutral-800"
+                  className="w-14 h-14 rounded-xl object-cover border border-neutral-100"
                 />
                 <div className="overflow-hidden">
-                  <h3 className="font-semibold text-xs text-neutral-800 dark:text-neutral-200 truncate">{shop.storeName}</h3>
+                  <h3 className="font-semibold text-xs text-neutral-800 truncate">{shop.storeName}</h3>
                   <div className="flex items-center gap-1 mt-1 text-[10px] text-neutral-400">
                     <User className="w-3.5 h-3.5" />
                     <span className="truncate">{shop.ownerName}</span>
@@ -213,16 +213,16 @@ export default function MedicalShops() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 mt-4 pt-3 border-t border-neutral-50 dark:border-neutral-800/80">
-                <span className="inline-flex items-center gap-1 text-[9px] font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+              <div className="flex items-center gap-2 mt-4 pt-3 border-t border-neutral-50">
+                <span className="inline-flex items-center gap-1 text-[9px] font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-600">
                   <Compass className="w-3 h-3" />
                   {shop.city}
                 </span>
-                <span className="inline-flex items-center gap-1 text-[9px] font-semibold px-2 py-0.5 rounded bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400">
+                <span className="inline-flex items-center gap-1 text-[9px] font-semibold px-2 py-0.5 rounded bg-amber-50 text-amber-600">
                   <Database className="w-3 h-3" />
                   {shop.currentSoftware}
                 </span>
-                <span className="ml-auto text-[10px] font-semibold text-neutral-800 dark:text-neutral-300">
+                <span className="ml-auto text-[10px] font-semibold text-neutral-800">
                   ₹{(parseInt(shop.monthlyRevenue) / 1000).toFixed(0)}k/mo
                 </span>
               </div>
@@ -234,10 +234,10 @@ export default function MedicalShops() {
       {/* Details View Modal */}
       {selectedShop && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-lg bg-white dark:bg-[#131b26] border border-neutral-100 dark:border-neutral-800 rounded-3xl shadow-2xl p-6 relative overflow-y-auto max-h-[90vh]">
+          <div className="w-full max-w-lg bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative overflow-y-auto max-h-[90vh]">
             <button 
               onClick={() => setSelectedShop(null)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
             >
               <X className="w-4 h-4" />
             </button>
@@ -249,43 +249,43 @@ export default function MedicalShops() {
                 className="w-16 h-16 rounded-2xl object-cover border"
               />
               <div>
-                <h2 className="text-sm font-bold text-neutral-800 dark:text-neutral-50">{selectedShop.storeName}</h2>
-                <p className="text-[10px] text-neutral-400 dark:text-neutral-500 mt-1">GSTIN: {selectedShop.gst || 'N/A'}</p>
-                <p className="text-[10px] text-neutral-400 dark:text-neutral-500">Drug License: {selectedShop.drugLicense || 'N/A'}</p>
+                <h2 className="text-sm font-bold text-neutral-800">{selectedShop.storeName}</h2>
+                <p className="text-[10px] text-neutral-400 mt-1">GSTIN: {selectedShop.gst || 'N/A'}</p>
+                <p className="text-[10px] text-neutral-400">Drug License: {selectedShop.drugLicense || 'N/A'}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mt-6">
               <div className="space-y-1">
                 <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wide">Owner Name</span>
-                <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">{selectedShop.ownerName}</p>
+                <p className="text-xs text-neutral-700 font-medium">{selectedShop.ownerName}</p>
               </div>
               <div className="space-y-1">
                 <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wide">Contact Number</span>
-                <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">{selectedShop.mobile}</p>
+                <p className="text-xs text-neutral-700 font-medium">{selectedShop.mobile}</p>
               </div>
               <div className="space-y-1">
                 <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wide">Current ERP System</span>
-                <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">{selectedShop.currentSoftware}</p>
+                <p className="text-xs text-neutral-700 font-medium">{selectedShop.currentSoftware}</p>
               </div>
               <div className="space-y-1">
                 <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wide">Monthly Revenue</span>
-                <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">₹{parseInt(selectedShop.monthlyRevenue).toLocaleString('en-IN')}</p>
+                <p className="text-xs text-neutral-700 font-medium">₹{parseInt(selectedShop.monthlyRevenue).toLocaleString('en-IN')}</p>
               </div>
               <div className="col-span-2 space-y-1">
                 <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wide">Address</span>
-                <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">{selectedShop.address}, {selectedShop.city}, {selectedShop.state} - {selectedShop.pin}</p>
+                <p className="text-xs text-neutral-700 font-medium">{selectedShop.address}, {selectedShop.city}, {selectedShop.state} - {selectedShop.pin}</p>
               </div>
               <div className="col-span-2 space-y-1">
                 <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wide">GPS Location Check</span>
-                <div className="flex items-center gap-2 p-2.5 rounded-xl border border-neutral-100 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#1a2330]">
-                  <Compass className="w-4 h-4 text-blue-600 dark:text-sky-400" />
-                  <span className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">{selectedShop.gpsLocation}</span>
+                <div className="flex items-center gap-2 p-2.5 rounded-xl border border-neutral-100 bg-neutral-50/50">
+                  <Compass className="w-4 h-4 text-blue-600" />
+                  <span className="text-xs text-neutral-700 font-medium">{selectedShop.gpsLocation}</span>
                   <a 
                     href={`https://www.google.com/maps/search/?api=1&query=${selectedShop.gpsLocation}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="ml-auto text-[10px] text-blue-600 dark:text-sky-400 font-semibold hover:underline"
+                    className="ml-auto text-[10px] text-blue-600 font-semibold hover:underline"
                   >
                     View Map
                   </a>
@@ -299,15 +299,15 @@ export default function MedicalShops() {
       {/* Add Shop Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs">
-          <div className="w-full max-w-xl bg-white dark:bg-[#131b26] border border-neutral-100 dark:border-neutral-800 rounded-3xl shadow-2xl p-6 relative overflow-y-auto max-h-[90vh]">
+          <div className="w-full max-w-xl bg-white border border-neutral-100 rounded-3xl shadow-2xl p-6 relative overflow-y-auto max-h-[90vh]">
             <button 
               onClick={() => setShowAddModal(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400"
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-neutral-100 text-neutral-400"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <h2 className="text-sm font-bold text-neutral-800 dark:text-neutral-50 mb-6">Register Medical Shop</h2>
+            <h2 className="text-sm font-bold text-neutral-800 mb-6">Register Medical Shop</h2>
 
             <form onSubmit={handleAddShop} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -316,7 +316,7 @@ export default function MedicalShops() {
                   <input 
                     required
                     value={storeName} onChange={(e) => setStoreName(e.target.value)}
-                    placeholder="Care Pharmacy" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="Care Pharmacy" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
@@ -324,7 +324,7 @@ export default function MedicalShops() {
                   <input 
                     required
                     value={ownerName} onChange={(e) => setOwnerName(e.target.value)}
-                    placeholder="Ramesh Kumar" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="Ramesh Kumar" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
@@ -332,28 +332,28 @@ export default function MedicalShops() {
                   <input 
                     required
                     value={mobile} onChange={(e) => setMobile(e.target.value)}
-                    placeholder="9876543210" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="9876543210" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">GST Number</label>
                   <input 
                     value={gst} onChange={(e) => setGst(e.target.value)}
-                    placeholder="27AAAAA1111A1Z1" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="27AAAAA1111A1Z1" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Drug License Code</label>
                   <input 
                     value={drugLicense} onChange={(e) => setDrugLicense(e.target.value)}
-                    placeholder="DL-12345-MUM" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="DL-12345-MUM" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Current ERP Software</label>
                   <select 
                     value={currentSoftware} onChange={(e) => setCurrentSoftware(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    className="w-full p-2.5 rounded-xl border text-xs"
                   >
                     <option value="Marg ERP">Marg ERP</option>
                     <option value="RetailGraph">RetailGraph</option>
@@ -368,14 +368,14 @@ export default function MedicalShops() {
                   <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Monthly Revenue (₹)</label>
                   <input 
                     value={monthlyRevenue} onChange={(e) => setMonthlyRevenue(e.target.value)}
-                    placeholder="250000" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="250000" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] font-semibold text-neutral-500 uppercase tracking-wide">Business Size</label>
                   <select 
                     value={businessSize} onChange={(e) => setBusinessSize(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    className="w-full p-2.5 rounded-xl border text-xs"
                   >
                     <option value="Small">Small (1-2 Employees)</option>
                     <option value="Medium">Medium (3-5 Employees)</option>
@@ -389,7 +389,7 @@ export default function MedicalShops() {
                 <textarea 
                   required rows={2}
                   value={address} onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Store Address, Near Central Bank" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                  placeholder="Store Address, Near Central Bank" className="w-full p-2.5 rounded-xl border text-xs"
                 />
               </div>
 
@@ -399,7 +399,7 @@ export default function MedicalShops() {
                   <input 
                     required
                     value={city} onChange={(e) => setCity(e.target.value)}
-                    placeholder="Mumbai" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="Mumbai" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
@@ -407,7 +407,7 @@ export default function MedicalShops() {
                   <input 
                     required
                     value={state} onChange={(e) => setState(e.target.value)}
-                    placeholder="Maharashtra" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="Maharashtra" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
                 <div className="space-y-1">
@@ -415,7 +415,7 @@ export default function MedicalShops() {
                   <input 
                     required
                     value={pin} onChange={(e) => setPin(e.target.value)}
-                    placeholder="400001" className="w-full p-2.5 rounded-xl border text-xs dark:bg-[#1c2635]"
+                    placeholder="400001" className="w-full p-2.5 rounded-xl border text-xs"
                   />
                 </div>
               </div>
@@ -424,9 +424,9 @@ export default function MedicalShops() {
                 <input 
                   id="createLead" type="checkbox" 
                   checked={createLead} onChange={(e) => setCreateLead(e.target.checked)}
-                  className="w-4 h-4 rounded text-blue-600 bg-neutral-50 border-neutral-300 dark:bg-[#1c2635]"
+                  className="w-4 h-4 rounded text-blue-600 bg-neutral-50 border-neutral-300"
                 />
-                <label htmlFor="createLead" className="text-[10px] text-neutral-500 dark:text-neutral-400 font-semibold">
+                <label htmlFor="createLead" className="text-[10px] text-neutral-500 font-semibold">
                   Auto-create Sales Lead in Pipeline for this shop
                 </label>
               </div>
@@ -435,13 +435,13 @@ export default function MedicalShops() {
                 <button 
                   type="button" 
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2.5 rounded-xl border border-neutral-200 text-xs font-semibold dark:border-neutral-800 cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl border border-neutral-200 text-xs font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button 
                   type="submit"
-                  className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white dark:text-[#0b0f17] rounded-xl text-xs font-semibold shadow-xs cursor-pointer transition-all"
+                  className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs cursor-pointer transition-all"
                 >
                   Register Store
                 </button>

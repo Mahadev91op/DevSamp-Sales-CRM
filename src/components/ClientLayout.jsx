@@ -43,6 +43,10 @@ export default function ClientLayout({ children }) {
   // 2. Initialize Theme
   useEffect(() => {
     setTheme('light'); // Force light theme always
+    if (typeof window !== 'undefined') {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('crm-theme', 'light');
+    }
   }, [setTheme]);
 
   // 3. PWA Service worker registration
@@ -64,6 +68,14 @@ export default function ClientLayout({ children }) {
             });
           }
         });
+        // Actively delete stale browser Cache Storage during development to refresh page layout
+        if ('caches' in window) {
+          caches.keys().then((names) => {
+            for (let name of names) {
+              caches.delete(name).then(() => console.log('Purged dev cache:', name));
+            }
+          });
+        }
       }
     }
   }, []);
@@ -99,7 +111,7 @@ export default function ClientLayout({ children }) {
       {isLoginRoute ? (
         <main>{children}</main>
       ) : (
-        <div className="flex min-h-screen bg-neutral-50">
+        <div className="flex min-h-screen bg-[#f8fafc]">
           <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
           
           <div className="flex-1 flex flex-col min-w-0">
@@ -123,7 +135,7 @@ export default function ClientLayout({ children }) {
         </div>
       )}
 
-      <Toaster position="top-right" theme={theme} richColors />
+      <Toaster position="top-right" theme="light" richColors />
     </>
   );
 }

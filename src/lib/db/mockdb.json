@@ -280,18 +280,20 @@
       "title": "Send GST Tax Invoice to Apollo Medical Store",
       "dueDate": "2026-07-24",
       "priority": "Medium",
-      "completed": true,
+      "completed": false,
       "assignedTo": "u1",
-      "shopId": "s5"
+      "shopId": "s5",
+      "updatedAt": "2026-07-24T12:46:46.651Z"
     },
     {
       "id": "t3",
       "title": "Follow up with Dr. Ramesh for Trial Feedback",
       "dueDate": "2026-07-26",
       "priority": "High",
-      "completed": false,
+      "completed": true,
       "assignedTo": "u1",
-      "shopId": "s1"
+      "shopId": "s1",
+      "updatedAt": "2026-07-24T12:46:45.652Z"
     }
   ],
   "trials": [
